@@ -1,0 +1,1 @@
+missionNamespace getVariable ["ATRAIN_Train_Driver_Condition",[{true},""]];
