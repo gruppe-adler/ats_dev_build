@@ -1,0 +1,44 @@
+ambient[] = {0.7,0.7,0.7,1};
+diffuse[] = {0.8,0.8,0.8,1};
+forcedDiffuse[] = {0,0,0,0};
+emmisive[] = {0,0,0,1};
+specular[] = {0.5,0.5,0.5,1};
+specularPower = 16;
+PixelShaderID = "Super";
+VertexShaderID = "Super";
+class Stage1
+{
+	texture="#(argb,8,8,3)color(0.5,0.5,1,1)";
+	uvSource = "tex";
+};
+class Stage2
+{
+	texture="#(argb,8,8,3)color(0.5,0.5,0.5,0)";
+	uvSource = "tex";
+};
+class Stage3
+{
+	texture="#(argb,8,8,3)color(0,0,0,0)";
+	uvSource = "tex";
+};
+class Stage4
+{
+	texture="#(argb,8,8,3)color(0,1,1,1)";
+	uvSource = "tex";
+};
+class Stage5
+{
+	texture="#(argb,8,8,3)color(0,0,0,0)";
+	uvSource = "tex";
+};
+class Stage6
+{
+	texture = "#(ai,64,64,1)fresnel(3.12,3.87)";
+	uvSource = "tex";
+};
+class Stage7
+{
+	texture = "a3\data_f\env_land_co.paa";
+	useWorldEnvMap = "true";
+	uvSource = "tex";
+};

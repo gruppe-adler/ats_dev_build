@@ -1,0 +1,22 @@
+////////////////////////////////////////////////////////////////////
+//DeRap: Produced from mikero's Dos Tools Dll version 4.90
+//Tue May 31 18:45:49 2016 : Source 'file' date Tue May 31 18:45:49 2016
+//http://dev-heaven.net/projects/list_files/mikero-pbodll
+////////////////////////////////////////////////////////////////////
+
+#define _ARMA_
+
+//Class data_f : lights\air_positionlight_white.rvmat{
+class StageTI
+{
+	texture = "a3\data_f\default_vehicle_ti_ca.paa";
+};
+ambient[] = {0,0,0,1};
+diffuse[] = {0,0,0,1};
+forcedDiffuse[] = {0,0,0,0};
+emmisive[] = {10000,10000,10000,1};
+specular[] = {0,0,0,1};
+specularPower = 1;
+PixelShaderID = "Normal";
+VertexShaderID = "Basic";
+//};
