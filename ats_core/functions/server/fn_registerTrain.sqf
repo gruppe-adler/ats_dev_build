@@ -26,6 +26,10 @@ private _trackMap = [_track] call ATRAIN_fnc_buildTrackMap;
 
 [_train] call ATRAIN_fnc_attachTrainToTrackMap;
 
+private _allEngines = missionNamespace getVariable ["ATRAIN_Registered_TrainEngines", []];
+_allEngines pushBackUnique _trainEngine;
+missionNamespace setVariable ["ATRAIN_Registered_TrainEngines",_allEngines,true];
+
 // dont add twice
 _registeredTrains pushBackUnique _train;
 _train setVariable ["ATRAIN_trainID",(count _registeredTrains), true];		

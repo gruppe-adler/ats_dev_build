@@ -32,7 +32,7 @@ _trainCar setVariable ["ATRAIN_Remote_Killed",!alive _trainCar,true];
 _trainCar setVariable ["ATRAIN_Static_Position",[getPosASLVisual _trainCar, [vectorDirVisual _trainCar, vectorUpVisual _trainCar]], true];
 
 if (_isDrivable) then {
-	_trainCar enableSimulationGlobal false;
+	// _trainCar enableSimulationGlobal false;
 	
 	//if (count _lightOffsets > 0) then {
 		[_trainCar] remoteExec ["ATRAIN_fnc_attachLights",0,true];

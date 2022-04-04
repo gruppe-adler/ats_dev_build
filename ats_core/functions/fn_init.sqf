@@ -1,9 +1,12 @@
 
 diag_log "Advanced Train Simulator (ATS) Loading...";
 
+// breaks stuff + is deprecated, disabling
+/*
 if(hasInterface) then {
-	[] call ATRAIN_fnc_removeAllEventHandlers;
+	[] call ATRAIN_fnc_removeAllEventHandlers; 
 };
+*/
 
 [] call ATRAIN_fnc_initTracks;
 
@@ -11,7 +14,7 @@ if(hasInterface) then {
 
 [] call ATRAIN_fnc_initServer;
 
-[] call ATRAIN_fnc_initSound;
+// [] call ATRAIN_fnc_initSound;
 
 
 

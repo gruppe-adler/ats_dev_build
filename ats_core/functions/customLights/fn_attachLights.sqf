@@ -14,4 +14,4 @@ params ["_trainEngine"];
         [_trainEngine, false] call ATRAIN_fnc_lightDirection;
     };
 
-}, 10, [_trainEngine]] call CBA_fnc_addPerFramehandler;
+}, 1, [_trainEngine]] call CBA_fnc_addPerFramehandler;

@@ -218,7 +218,7 @@ if(hasInterface) then {
 			if(isNull _currentTrain && !isNil "_staticPosition") then {
 				_trainCar setPosASL (_staticPosition select 0);
 				_trainCar setVectorDirAndUp (_staticPosition select 1);
-				_trainCar enableSimulationGlobal false;
+				// _trainCar enableSimulationGlobal false;
 			};
 		} forEach _registeredCars;
 		sleep 10;

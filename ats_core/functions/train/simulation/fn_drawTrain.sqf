@@ -44,7 +44,8 @@ if(_trainDerailedSimulated) exitWith {};
 	};
 	*/
 	
-	if(_distanceFromLastToNewPosition > 0.01) then {
+	// prevent flipping
+	// if(_distanceFromLastToNewPosition > 0.01) then {
 		private _distanceMovedFromLastPosition = _timeSinceLastSeen * _velocityFromLastToNewPosition;
 		private _percentMovedFromLastPosition = 0;
 		if(_distanceFromLastToNewPosition != 0) then {
@@ -88,7 +89,7 @@ if(_trainDerailedSimulated) exitWith {};
 		// linearConversion [_lastSeen, _currentTime+0.1, _currentTime, 0, 1]
 		
 		_trainCar setVariable ["ATRAIN_Current_Draw_Position", _currentDrawPosition];
-	};
+	//};
 
 } forEach _trainCars;
 

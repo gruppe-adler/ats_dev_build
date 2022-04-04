@@ -44,7 +44,7 @@ class CfgVehicles {
         selectionDamage = "damage";
 
         simulation = "carx";
-        
+        gearbox[] = {-18, 0, 110, 16.15, 14.44, 13.33};
         startEngine = 0;
         canFloat = 0;
         hasdriver = 0;
@@ -131,7 +131,16 @@ class CfgVehicles {
         turnCoef = 1;
         terrainCoef = 1;
         
-        gearBox[] = {-1, 0, 1, 2, 3, 4};
+        class complexGearbox
+        {
+            GearboxRatios[]    = {"R1",-3.231,"N",0,"D1",2.462,"D2",1.870,"D3",1.241,"D4",0.970,"D5",0.711};
+            TransmissionRatios[] = {"High",4.111}; // Optional: defines transmission ratios (for example, High and Low range as commonly found in offroad vehicles)
+            gearBoxMode        = "auto"; //gearbox can be of type: full-auto (only requires 'W' or 'S'), auto (requires shift between drive and reverse), semi-auto, manual
+            moveOffGear        = 1; // defines what gear an automatic or semi-automatic gearbox will move off from stationary in. 1 by default.
+            driveString        = "D"; // string to display in the HUD for forward gears.
+            neutralString      = "N"; // string to display in the HUD for neutral gear.
+            reverseString      = "R"; // string to display in the HUD for reverse gears.
+        };
         
         scudModel = "";
         armorStructural = 1;
@@ -192,6 +201,18 @@ class CfgVehicles {
         
         class Sounds
         {
+            class train_engine_idle
+            {
+                sound[] = {"\ats\core\sounds\train_engine_idle.ogg", 2, 1, 800};
+                frequency = "1";
+                volume = "CustomSoundController1";
+            };
+            class train_engine
+            {
+                sound[] = {"\ats\core\sounds\train_engine.ogg", 2, 1, 800};
+                frequency = "1";
+                volume = "CustomSoundController2";
+            };
         };
         class UserActions
         {
@@ -201,16 +222,6 @@ class CfgVehicles {
         };
         class RenderTargets
         {
-        };
-        
-        class ComplexGearbox
-        {
-            GearboxRatios[] = {};
-            TransmissionRatios[] = {};
-            moveOffGear = 1;
-            driveString = "";
-            neutralString = "";
-            reverseString = "";
         };
         
         class SquadTitles

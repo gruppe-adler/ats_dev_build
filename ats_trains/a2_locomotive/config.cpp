@@ -26,7 +26,7 @@ class CfgVehicles {
 		icon = "iconObject_2x5";
 		displayName = "A2 Locomotive";
 		_generalMacro = "ATS_Trains_A2Locomotive_Base";
-		model = "ats\trains\a2_locomotive\a2_loco_nomi2.p3d";
+		model = "ats\trains\a2_locomotive\a2_locomotive.p3d";
 		hiddenSelections[] = {"Camo1"};
 
 		//model.cfg references these for their source
@@ -56,32 +56,6 @@ class CfgVehicles {
 			class HitGlass6: HitGlass1
 			{
 				hitpoint = "HitGlass6";
-			};
-
-
-			class Hit_Light_L: HitGlass1
-			{
-				hitpoint = "Light_L";
-			};
-			class Hit_Light_R: HitGlass1
-			{
-				hitpoint = "Light_R";
-			};
-			class Hit_Light_M: HitGlass1
-			{
-				hitpoint = "Light_M";
-			};
-			class Hit_Light_Back_L: HitGlass1
-			{
-				hitpoint = "Light_Back_L";
-			};
-			class Hit_Light_Back_R: HitGlass1
-			{
-				hitpoint = "Light_Back_R";
-			};
-			class Hit_Light_Back_M: HitGlass1
-			{
-				hitpoint = "Light_Back_M";
 			};
 		};
 		
@@ -141,95 +115,30 @@ class CfgVehicles {
 				passThrough = 1;
 				explosionShielding = 2;
 			};
-			class Light_L 
-			{
-				armor = 0.5;
-				material = -1;
+
+			class Hit_Light_L {
 				name = "light_l";
-				visual = "light_l";
-				passThrough = 1;
-				convexComponent = "light_l";
+				hitpoint = "Light_L";
+				source = "Hit";
+				raw = 1;
+				armor=0.125; 
+				passThrough=0;
 			};
-			class Light_R 
-			{
-				armor = 0.5;
-				material = -1;
+			class Hit_Light_R:Hit_Light_L {
 				name = "light_r";
-				visual = "light_r";
-				passThrough = 1;
-				convexComponent = "light_r";
+				hitpoint = "Light_R";
 			};
-			class Light_L_red 
-			{
-				armor = 0.5;
-				material = -1;
-				name = "light_l_red";
-				visual = "light_l_red";
-				passThrough = 1;
-				convexComponent = "light_l_red";
+			class Hit_Right_M:Hit_Light_L {
+				name = "Right_M";
+				hitpoint = "Right_M";
 			};
-			class Light_R_red 
-			{
-				armor = 0.5;
-				material = -1;
-				name = "light_r_red";
-				visual = "light_r_red";
-				passThrough = 1;
-				convexComponent = "light_r_red";
+			class Hit_Light_back_L:Hit_Light_L {
+				name = "Light_back_L";
+				hitpoint = "Light_back_L";
 			};
-			class Light_M 
-			{
-				armor = 0.5;
-				material = -1;
-				name = "light_m";
-				visual = "light_m";
-				passThrough = 1;
-				convexComponent = "light_m";
-			};
-			class Light_Back_L 
-			{
-				armor = 0.5;
-				material = -1;
-				name = "light_back_l";
-				visual = "light_back_l";
-				passThrough = 1;
-				convexComponent = "light_back_l";
-			};
-			class Light_Back_R 
-			{
-				armor = 0.5;
-				material = -1;
-				name = "light_back_r";
-				visual = "light_back_r";
-				passThrough = 1;
-				convexComponent = "light_back_r";
-			};
-			class Light_Back_L_red
-			{
-				armor = 0.5;
-				material = -1;
-				name = "light_back_l_red";
-				visual = "light_back_l_red";
-				passThrough = 1;
-				convexComponent = "light_back_l_red";
-			};
-			class Light_Back_R_red 
-			{
-				armor = 0.5;
-				material = -1;
-				name = "light_back_r_red";
-				visual = "light_back_r_red";
-				passThrough = 1;
-				convexComponent = "light_back_r_red";
-			};
-			class Light_Back_M 
-			{
-				armor = 0.5;
-				material = -1;
-				name = "light_back_m";
-				visual = "light_back_m";
-				passThrough = 1;
-				convexComponent = "light_back_m";
+			class Hit_Light_back_R:Hit_Light_L {
+				name = "Light_back_R";
+				hitpoint = "Light_back_R";
 			};
 		};
 
@@ -255,14 +164,14 @@ class CfgVehicles {
 				displayName = "Blue";
 				author = "$STR_A3_Bohemia_Interactive & Eagledude4";
 				textures[] = {"ats\trains\a2_locomotive\data\1_co.paa"};
-				factions[] = {"CIV_F"};
+				factions[] = {};
 			};
 			class Red
 			{
 				displayName = "Red";
 				author = "$STR_A3_Bohemia_Interactive & Eagledude4";
 				textures[] = {"ats\trains\a2_locomotive\data\1r_co.paa"};
-				factions[] = {"CIV_F"};
+				factions[] = {};
 			};
 		};
 		
@@ -281,8 +190,8 @@ class CfgVehicles {
 				hitpoint 		= "Light_L";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
 				selection 		= "Light_L";				// selection for artificial glow around the bulb, not much used any more
 				size 			= 1;						// size of the light point seen from distance
-				innerAngle 		= 100;						// angle of full light
-				outerAngle 		= 179;						// angle of some light
+				innerAngle 		= 30;						// angle of full light
+				outerAngle 		= 120;						// angle of some light
 				coneFadeCoef 	= 10;						// attenuation of light between the above angles
 				intensity 		= 1;						// strength of the light
 				useFlare 		= true;						// does the light use flare?
@@ -307,34 +216,56 @@ class CfgVehicles {
 				selection 		= "Light_R";				// selection for artificial glow around the bulb, not much used any more
 			};
 
-			class LightCarBackL01: LightCarHeadL01 
+			class LightCarHeadM01: LightCarHeadL01 
+			{
+				position 		= "LightCarHeadM01";		// memory point for start of the light and flare
+				direction 		= "LightCarHeadM01_end";	// memory point for the light direction
+				hitpoint 		= "Light_M";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
+				selection 		= "Light_M";				// selection for artificial glow around the bulb, not much used any more
+				size 			= 1.5;						// size of the light point seen from distance
+				intensity 		= 2;						// strength of the light
+				flareSize 		= 1.5;						// how big is the flare
+			};
+
+			class LightCarBackL01: LightCarHeadL01
 			{
 				position 		= "LightCarBackL01";		// memory point for start of the light and flare
 				direction 		= "LightCarBackL01_end";	// memory point for the light direction
-				hitpoint 		= "Light_Back_L";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
-				selection 		= "Light_Back_L";				// selection for artificial glow around the bulb, not much used any more
+				hitpoint 		= "Light_back_l";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
+				selection 		= "Light_back_l";				// selection for artificial glow around the bulb, not much used any more
 			};
 
 			class LightCarBackR01: LightCarBackL01 
 			{
 				position 		= "LightCarBackR01";		// memory point for start of the light and flare
 				direction 		= "LightCarBackR01_end";	// memory point for the light direction
-				hitpoint 		= "Light_Back_R";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
-				selection 		= "Light_Back_R";				// selection for artificial glow around the bulb, not much used any more
+				hitpoint 		= "Light_back_r";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
+				selection 		= "Light_back_r";				// selection for artificial glow around the bulb, not much used any more
 			};
 
-			class LightCarHeadL02_red: LightCarBackL01 
+			class LightCarBackM01: LightCarBackL01 
 			{
-				position 		= "LightCarHeadL02_red";		// memory point for start of the light and flare
-				direction 		= "LightCarHeadL02_red_end";	// memory point for the light direction
-				hitpoint 		= "Light_L_red";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
-				selection 		= "Light_L_red";				// selection for artificial glow around the bulb, not much used any more
+				position 		= "LightCarBackM01";		// memory point for start of the light and flare
+				direction 		= "LightCarBackM01_end";	// memory point for the light direction
+				hitpoint 		= "Light_back_m";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
+				selection 		= "Light_back_m";				// selection for artificial glow around the bulb, not much used any more
+				size 			= 1.5;						// size of the light point seen from distance
+				intensity 		= 2;						// strength of the light
+				flareSize 		= 1.5;						// how big is the flare
+			};
+
+			class LightCarHeadL01_red 
+			{
+				position 		= "LightCarHeadL01_red";		// memory point for start of the light and flare
+				direction 		= "LightCarHeadL01_red_end";	// memory point for the light direction
+				hitpoint 		= "Light_l_red";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
+				selection 		= "Light_l_red";				// selection for artificial glow around the bulb, not much used any more
 
 				color[] 		= {1900, 100, 100};		// approximate colour of standard lights
 				ambient[]		= {5, 0, 0};				// pure red
 				size 			= 1;						// size of the light point seen from distance
-				innerAngle 		= 100;						// angle of full light
-				outerAngle 		= 179;						// angle of some light
+				innerAngle 		= 30;						// angle of full light
+				outerAngle 		= 120;						// angle of some light
 				coneFadeCoef 	= 10;						// attenuation of light between the above angles
 				intensity 		= 1;						// strength of the light
 				useFlare 		= true;						// does the light use flare?
@@ -352,50 +283,28 @@ class CfgVehicles {
 				};
 			};
 
-			class LightCarHeadR02_red: LightCarHeadL02_red 
+			class LightCarHeadR01_red: LightCarHeadL01_red
 			{
-				position 		= "LightCarHeadR02_red";		// memory point for start of the light and flare
-				direction 		= "LightCarHeadR02_red_end";	// memory point for the light direction
-				hitpoint 		= "Light_R_red";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
-				selection 		= "Light_R_red";				// selection for artificial glow around the bulb, not much used any more
+				position 		= "LightCarHeadR01_red";		// memory point for start of the light and flare
+				direction 		= "LightCarHeadR01_red_end";	// memory point for the light direction
+				hitpoint 		= "Light_r_red";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
+				selection 		= "Light_r_red";				// selection for artificial glow around the bulb, not much used any more
 			};
 
-			class LightCarBackR02_red: LightCarHeadL02_red 
+			class LightCarBackR01_red: LightCarHeadL01_red
 			{
-				position 		= "LightCarBackR02_red";		// memory point for start of the light and flare
-				direction 		= "LightCarBackR02_red_end";	// memory point for the light direction
-				hitpoint 		= "Light_Back_R_red";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
-				selection 		= "Light_Back_R_red";				// selection for artificial glow around the bulb, not much used any more
+				position 		= "LightCarBackR01_red";		// memory point for start of the light and flare
+				direction 		= "LightCarBackR01_red_end";	// memory point for the light direction
+				hitpoint 		= "Light_back_r_red";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
+				selection 		= "Light_back_r_red";				// selection for artificial glow around the bulb, not much used any more
 			};
 
-			class LightCarBackL02_red: LightCarBackR02_red 
+			class LightCarBackL01_red: LightCarHeadL01_red
 			{
-				position 		= "LightCarBackL02_red";		// memory point for start of the light and flare
-				direction 		= "LightCarBackL02_red_end";	// memory point for the light direction
-				hitpoint 		= "Light_Back_L_red";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
-				selection 		= "Light_Back_L_red";				// selection for artificial glow around the bulb, not much used any more
-			};
-			
-			class LightCarHeadM01: LightCarHeadL01 
-			{
-				position 		= "LightCarHeadM01";		// memory point for start of the light and flare
-				direction 		= "LightCarHeadM01_end";	// memory point for the light direction
-				hitpoint 		= "Light_M";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
-				selection 		= "Light_M";				// selection for artificial glow around the bulb, not much used any more
-				size 			= 1.5;						// size of the light point seen from distance
-				intensity 		= 2;						// strength of the light
-				flareSize 		= 1.5;						// how big is the flare
-			};
-
-			class LightCarBackM01: LightCarBackL01 
-			{
-				position 		= "LightCarBackM01";		// memory point for start of the light and flare
-				direction 		= "LightCarBackM01_end";	// memory point for the light direction
-				hitpoint 		= "Light_Back_M";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
-				selection 		= "Light_Back_M";				// selection for artificial glow around the bulb, not much used any more
-				size 			= 1.5;						// size of the light point seen from distance
-				intensity 		= 2;						// strength of the light
-				flareSize 		= 1.5;						// how big is the flare
+				position 		= "LightCarBackL01_red";		// memory point for start of the light and flare
+				direction 		= "LightCarBackL01_red_end";	// memory point for the light direction
+				hitpoint 		= "Light_back_l_red";				// point(s) in hitpoint lod for the light (hitPoints are created by engine)
+				selection 		= "Light_back_l_red";				// selection for artificial glow around the bulb, not much used any more
 			};
 
 			class LightInt: LightCarHeadL01 
@@ -422,7 +331,7 @@ class CfgVehicles {
 			};
 		};
 
-		aggregateReflectors[] = {{"LightCarHeadL01","LightCarHeadR01","LightCarHeadM01", "LightCarBackR02_red", "LightCarBackL02_red"}, {"LightCarBackL01","LightCarBackR01","LightCarBackM01","LightCarHeadL02_red", "LightCarHeadR02_red"}, {"LightInt"}}; // aggregating reflectors helps the engine a lot
+		aggregateReflectors[] = {{"LightCarHeadL01","LightCarHeadR01","LightCarHeadM01"}, {"LightCarBackL01","LightCarBackR01"}, {"LightInt"}}; // aggregating reflectors helps the engine a lot
 		// it might be even good to aggregate all lights into one source as it is done for most of the cars
 	};
 

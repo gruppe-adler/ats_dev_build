@@ -11,6 +11,18 @@ if(_deltaSimulationTime > (missionNamespace getVariable ["ATS_trainSimulation_In
 	_deltaSimulationTime = 0;
 };
 
+#define ENGINE_DISTANCE 800
+#define ENGINE_MAX_SPEED 10
+#define ENGINE_IDLE_DISTANCE 600
+#define ENGINE_IDLE_MAX_SPEED 10
+
+private _trainSpeed = _train getVariable ["ATRAIN_Velocity", 0];
+// simulate sound controller
+setCustomSoundController [_trainEngine, "CustomSoundController1", (1-((_trainSpeed min ENGINE_IDLE_MAX_SPEED)/ENGINE_IDLE_MAX_SPEED)) max 0.8]; // idle engine
+setCustomSoundController [_trainEngine, "CustomSoundController2", (_trainSpeed min ENGINE_MAX_SPEED)/ENGINE_MAX_SPEED]; // driving engine
+
+
+
 // Simulate train derailment
 private _isDerailed = _train getVariable ["ATRAIN_Remote_Train_Derailed",false];
 if(_isDerailed) exitWith {
@@ -148,15 +160,17 @@ if(count _nodePath > 2) then {
 private _lightsEnabled = _train getVariable ["ATRAIN_Remote_Lights_Enabled", false];
 if(!isNull _train) then {
 	if(_lightsEnabled && !islighton _trainEngine) then {
-		_trainEngine enableSimulationGlobal true;
+		// _trainEngine enableSimulationGlobal true;
 		_trainEngine setPilotLight true;
 	};
 	if(!_lightsEnabled && islighton _trainEngine) then {
-		_trainEngine enableSimulationGlobal true;
+		// _trainEngine enableSimulationGlobal true;
 		_trainEngine setPilotLight false;
 
 	};
+	/*
 	[{
 		_this enableSimulationGlobal false;
 	}, _trainEngine] call CBA_fnc_execNextFrame;
+	*/
 };

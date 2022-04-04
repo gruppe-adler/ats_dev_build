@@ -1,12 +1,29 @@
-if (isClass(configFile >> "CfgPatches" >> "zen_main")) then {
+[{
+     (isClass(configFile >> "CfgPatches" >> "zen_main")) &&
+     !(isNull (findDisplay 312))
+}, 
+{
+     // add handler to show interface
+     {
+          _curator = _x;
+          _curator addEventHandler ["CuratorObjectSelectionChanged",{
+               params ["_curator", "_entity"];
 
-    ["ATS Trains", "Open/Close Train Interface", {
-         params ["_position", "_object"];
+               private _trainCar = [_entity] call ATRAIN_fnc_isTrain;
+               if (isNull _trainCar) exitWith {};
+               private _trainDef = [_entity] call ATRAIN_fnc_getTrainDefinition;
+               _trainDef params ["_className", "_isDrivable", "_isRideable"];
+               if (_isDrivable) then {
+                    private _train = [_trainCar] call ATRAIN_fnc_getTrain;
+                    [_train] call ATRAIN_fnc_createZeusControl;
+               } else {
+                    player setVariable ["ATRAIN_interfaceOpened", objNull]; // closes zeus control
+               };
+          }];
 
-         [] call ATRAIN_fnc_createZeusControl;
-                
-    }] call zen_custom_modules_fnc_register;
+          _curator addCuratorEditableObjects [(missionNamespace getVariable ["ATRAIN_Registered_TrainEngines", []]), false];
 
+     } forEach allcurators;
     /*
     ["ATS Trains", "Create remote controllable Train", {
          params ["_position", "_object"];
@@ -86,5 +103,6 @@ if (isClass(configFile >> "CfgPatches" >> "zen_main")) then {
                 
     }] call zen_custom_modules_fnc_register;
     */
-};
+
+}] call CBA_fnc_waitUntilAndExecute;
 
