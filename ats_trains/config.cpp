@@ -219,6 +219,12 @@ class CfgVehicles {
                 frequency = "1";
                 volume = "CustomSoundController3";
             };
+            class train_brake
+            {
+                sound[] = {"\ats\core\sounds\train_brake1.ogg", 2, 1, 800};
+                frequency = "1";
+                volume = "CustomSoundController4";
+            };
         };
         class UserActions
         {

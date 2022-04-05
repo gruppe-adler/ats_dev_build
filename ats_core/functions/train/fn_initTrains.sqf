@@ -154,6 +154,7 @@ if (isServer) then {
 					[_x] call ATRAIN_fnc_simulateTrainVelocity;
 					[_x] call ATRAIN_fnc_simulateTrain;
 					[_x] call ATRAIN_fnc_simulateTrainAttachment;
+					[_x] call ATRAIN_fnc_simulateTrainSound;
 					// [_x] call ATRAIN_fnc_handleSimulationNetworkUpdates;
 					_x setVariable ["ATRAIN_Calculations_Queued",false];
 				};

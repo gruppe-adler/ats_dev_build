@@ -203,31 +203,7 @@ class CfgFunctions
             class handleKilled{};
             class simulateTrainCarsKilled{};
             class simulateTrainCollision{};
-        };
-        class TrainSound
-        {
-            file = "ats\core\functions\train\sound";
-            class addTrainSoundDefinition{};
-            class getTrainSoundDefinition{};
-            class initTrainSound{};
-            class simulateTrainSounds{};
-        };
-        class Sound
-        {
-            file = "ats\core\functions\sound";
-            class attachSoundSource{};
-            class createSoundSource{};
-            class deleteSoundSource{};
-            class detatchSoundSource{};
-            class enableSoundSource{};
-            class getSoundSourcePositionASL{};
-            class getSoundSourceVolume{};
-            class initSound{};
-            class nearbySoundSourceHandler{};
-            class setSoundSourcePositionASL{};
-            class setSoundSourceVolume{};
-            class soundSourceAttachedTo{};
-            class soundSourceSimulationHandler{};
+            class simulateTrainSound{};
         };
     };
 };

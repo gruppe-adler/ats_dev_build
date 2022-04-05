@@ -26,6 +26,28 @@ class CfgVehicles {
 		editorPreview = "\ats\trains\screenshots\ATS_Trains_Steam_Small.jpg";
 		displayName = "Steam Locomotive (Small)";
 		author 	= "Profi Developers, imported by badbenson";
+
+		class Sounds
+        {
+            class train_engine_idle
+            {
+                sound[] = {"\ats\core\sounds\train_steam_engine_idle.ogg", 2, 1, 600};
+                frequency = "1";
+                volume = "CustomSoundController1";
+            };
+            class train_engine
+            {
+                sound[] = {"\ats\core\sounds\train_steam_engine.ogg", 2, 1, 800};
+                frequency = "1";
+                volume = "CustomSoundController2";
+            };
+            class train_track
+            {
+                sound[] = {"\ats\core\sounds\train_track.ogg", 2, 1, 800};
+                frequency = "1";
+                volume = "CustomSoundController3";
+            };
+        };
 	};
 	
 	class ATS_Trains_Steam_Large : ATS_Trains_Base
@@ -34,7 +56,29 @@ class CfgVehicles {
 		model = "\ats\trains\steam\models\ats_trains_steam_large.p3d";
 		editorPreview = "\ats\trains\screenshots\ATS_Trains_Steam_Large.jpg";
 		displayName = "Steam Locomotive (Large)";
-		author 	= "Profi Developers, imported by badbenson";		
+		author 	= "Profi Developers, imported by badbenson";
+
+		class Sounds
+        {
+            class train_engine_idle
+            {
+                sound[] = {"\ats\core\sounds\train_steam_engine_idle.ogg", 2, 1, 600};
+                frequency = "1";
+                volume = "CustomSoundController1";
+            };
+            class train_engine
+            {
+                sound[] = {"\ats\core\sounds\train_steam_engine.ogg", 2, 1, 800};
+                frequency = "1";
+                volume = "CustomSoundController2";
+            };
+            class train_track
+            {
+                sound[] = {"\ats\core\sounds\train_track.ogg", 2, 1, 800};
+                frequency = "1";
+                volume = "CustomSoundController3";
+            };
+        };
 	};
 	
 };
