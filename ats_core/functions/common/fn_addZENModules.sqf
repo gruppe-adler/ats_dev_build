@@ -19,13 +19,8 @@
                } else {
                     player setVariable ["ATRAIN_interfaceOpened", objNull]; // closes zeus control
                };
-          }];
 
-          
-          _curator addEventHandler ["CuratorObjectSelectionChanged", {
-                params ["_curator", "_entity"];
-
-                [{
+               [{
                     (
                          count (curatorSelected select 0) +
                          count (curatorSelected select 1) +
@@ -41,6 +36,7 @@
           _curator addCuratorEditableObjects [(missionNamespace getVariable ["ATRAIN_Registered_TrainEngines", []]), false];
 
      } forEach allcurators;
+     
     /*
     ["ATS Trains", "Create remote controllable Train", {
          params ["_position", "_object"];
