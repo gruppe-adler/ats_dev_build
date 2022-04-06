@@ -117,7 +117,7 @@ _sliderAcceleration ctrlSetPosition [
     1 * _GUI_GRID_H
 ];
 _sliderAcceleration sliderSetRange [-100, 100];
-_sliderAcceleration sliderSetSpeed [1, 1, 1];
+_sliderAcceleration sliderSetSpeed [1, .5, 1];
 _sliderAcceleration sliderSetPosition 0;    
 
 _sliderAcceleration ctrlCommit 0;
