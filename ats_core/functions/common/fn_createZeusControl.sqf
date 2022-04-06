@@ -21,12 +21,27 @@ if (isNull _display) exitWith { hint "no Zeus Display found"; };
 _GUI_GRID_W = _GUI_GRID_W / 40;
 _GUI_GRID_H = _GUI_GRID_H / 25;
 
+
+// control group
+private _controlGroup = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1];
+_controlGroup ctrlSetPosition [
+    0,
+    safeZoneY + 40 * _GUI_GRID_H,
+    1,
+    5 * _GUI_GRID_H
+];
+_controlGroup ctrlSetBackgroundColor [0,0,0,0.5];
+_controlGroup ctrlEnable false; // to prevent any click issues
+_controlGroup ctrlCommit 0;
+_controls pushBackUnique _controlGroup;
+
+
 // background of control
-private _bg = _display ctrlCreate ["RscText", -1];
+private _bg = _display ctrlCreate ["RscText", -1, _controlGroup];
 _bg ctrlSetPosition [
-    safezoneX + safezoneW - 23.6 * _GUI_GRID_W,
-    safeZoneY + 3 * _GUI_GRID_H + (3* _GUI_GRID_H),
-    11 * _GUI_GRID_W,
+    0,
+    0,
+    1,
     5 * _GUI_GRID_H
 ];
 _bg ctrlSetBackgroundColor [0,0,0,0.5];
@@ -35,11 +50,11 @@ _bg ctrlCommit 0;
 _controls pushBackUnique _bg;
 
 
-private _text = _display ctrlCreate ["RscStructuredText", -1];
+private _text = _display ctrlCreate ["RscStructuredText", -1, _controlGroup];
 _text ctrlSetPosition [
-    safezoneX + safezoneW - 23.6 * _GUI_GRID_W,
-    safeZoneY + 3 * _GUI_GRID_H + (3* _GUI_GRID_H),
-    11 * _GUI_GRID_W,
+    0,
+    0,
+    1,
     3 * _GUI_GRID_H
 ];
 private _displayText = "Train " + str (_id);
@@ -49,11 +64,11 @@ _text ctrlCommit 0;
 _controls pushBackUnique _text;
 
 // speed
-private _speedText = _display ctrlCreate ["RscStructuredText", -1];
+private _speedText = _display ctrlCreate ["RscStructuredText", -1, _controlGroup];
 _speedText ctrlSetPosition [
-    safezoneX + safezoneW - 23.6 * _GUI_GRID_W,
-    safeZoneY + 5 * _GUI_GRID_H + (3* _GUI_GRID_H),
-    11 * _GUI_GRID_W,
+    0,
+    3 * _GUI_GRID_H,
+    15 * _GUI_GRID_W,
     1 * _GUI_GRID_H
 ];
 private _displayText = "Speed: ";
@@ -65,9 +80,9 @@ _controls pushBackUnique _speedText;
 // Button Brake
 private _buttonBreak = _display ctrlCreate ["RscStructuredText", -1];
 _buttonBreak ctrlSetPosition [
-    safezoneX + safezoneW - 23.6 * _GUI_GRID_W,
-    safeZoneY + 4 * _GUI_GRID_H + (3* _GUI_GRID_H),
-    3 * _GUI_GRID_W,
+    0,
+    2 * _GUI_GRID_H,
+    1 * _GUI_GRID_W,
     1 * _GUI_GRID_H
 ];
 _buttonBreak ctrlsettext "B";
@@ -94,11 +109,11 @@ _buttonBreak ctrlAddEventHandler ["MouseButtonClick", {
 
 
 // Slider Acceleration
-private _sliderAcceleration = _display ctrlCreate ["RSC_ATRAINS_SliderH", -1];
+private _sliderAcceleration = _display ctrlCreate ["RSC_ATRAINS_SliderH", -1, _controlGroup];
 _sliderAcceleration ctrlSetPosition [
-    safezoneX + safezoneW - 23.6 * _GUI_GRID_W,
-    safeZoneY + 6 * _GUI_GRID_H + (3* _GUI_GRID_H),
-    11 * _GUI_GRID_W,
+    0,
+    1 * _GUI_GRID_H,
+    1,
     1 * _GUI_GRID_H
 ];
 _sliderAcceleration sliderSetRange [-100, 100];
@@ -118,11 +133,11 @@ _sliderAcceleration ctrlAddEventHandler ["SliderPosChanged", {
 }];
 
  // Button Horn
-private _buttonHorn = _display ctrlCreate ["RscStructuredText", -1];
+private _buttonHorn = _display ctrlCreate ["RscStructuredText", -1, _controlGroup];
 _buttonHorn ctrlSetPosition [
-    safezoneX + safezoneW - 15.6 * _GUI_GRID_W,
-    safeZoneY + 4 * _GUI_GRID_H + (3* _GUI_GRID_H),
-    3 * _GUI_GRID_W,
+    0.9,
+    2 * _GUI_GRID_H,
+    1 * _GUI_GRID_W,
     1 * _GUI_GRID_H
 ];
 _buttonHorn ctrlsettext "H";

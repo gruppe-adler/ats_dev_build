@@ -83,6 +83,12 @@ class CfgFunctions
             class profileMethodStop{};
             class resetProfile{};
         };
+        class fx
+        {
+            file = "ats\core\functions\train\fx";
+            class sparksEffectClient{ postinit = 1; };
+            class sparkSmall{};
+        };
         class Server
         {
             file = "ats\core\functions\server";

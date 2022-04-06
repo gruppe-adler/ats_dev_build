@@ -11,7 +11,6 @@ if(_deltaSimulationTime > (missionNamespace getVariable ["ATS_trainSimulation_In
 	_deltaSimulationTime = 0;
 };
 
-
 // Simulate train derailment
 private _isDerailed = _train getVariable ["ATRAIN_Remote_Train_Derailed",false];
 if(_isDerailed) exitWith {
@@ -54,6 +53,13 @@ if(_isDerailed) exitWith {
 		};
 	} forEach _trainCars;
 };
+
+// Braking Effects
+private _breakEnabled = player getVariable ["ATRAIN_Remote_brake_Enabled", false];
+if (_breakEnabled && random 10 > 9) then {
+	["ATRAIN_sparkSmall", [(selectRandom _trainCars)]] call CBA_fnc_globalEvent;
+};
+
 
 // Calculate train distance from start of path
 private _trainDistanceFromFront = _train getVariable ["ATRAIN_Distance_From_Front",0];
