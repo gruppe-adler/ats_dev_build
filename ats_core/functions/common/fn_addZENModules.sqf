@@ -21,6 +21,23 @@
                };
           }];
 
+          
+          _curator addEventHandler ["CuratorObjectSelectionChanged", {
+                params ["_curator", "_entity"];
+
+                [{
+                    (
+                         count (curatorSelected select 0) +
+                         count (curatorSelected select 1) +
+                         count (curatorSelected select 2) +
+                         count (curatorSelected select 3)
+                     ) == 0
+                 },
+                 {
+                    player setVariable ["ATRAIN_interfaceOpened", objNull]; // closes zeus control
+                 }, []] call CBA_fnc_waitUntilAndExecute;
+          }];
+
           _curator addCuratorEditableObjects [(missionNamespace getVariable ["ATRAIN_Registered_TrainEngines", []]), false];
 
      } forEach allcurators;
