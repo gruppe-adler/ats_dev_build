@@ -53,6 +53,7 @@ class CfgFunctions
         {
             file = "ats\core\functions\common";
             class addEventHandler{};
+            class animateUI{};
             class getTypeOf{};
             class hidePlayerObjectGlobal{};
             class rebuildArrayLookupIndexes{};

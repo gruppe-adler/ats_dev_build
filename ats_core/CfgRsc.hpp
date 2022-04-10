@@ -22,3 +22,41 @@ class RSC_ATRAINS_SliderH
         tooltipColorBox[] = {1,1,1,1};
         tooltipColorShade[] = {0,0,0,0.65};
 };
+
+class RSC_ATRAINS_RscButton {
+    x = 0;
+    y = 0;
+    w = 0.15;
+    h = 0.1;
+    access = 0;
+    type = CT_BUTTON;
+    style = ST_CENTER;
+    text = "";
+    colorText[] = {1,1,1,1};
+    colorDisabled[] = {1,1,1,0.1};
+    colorBackground[] = {0,0,0,0.8};
+    colorFocused[] = {1,1,1,0.5};
+    colorBackgroundActive[] = {1,1,1,0.8}; // hover
+    colorBackgroundDisabled[] = {0.3,0.3,0.3,0.3};
+    colorBackgroundFocused[] = {0,0,0,0.5};
+    colorShadow[] = {0,0,0,0};
+    colorBorder[] = {0,0,0,1};
+    soundEnter[] = {"\A3\ui_f\data\sound\RscButton\soundEnter", 0.09, 1};
+    soundPush[] = {"\A3\ui_f\data\sound\RscButton\soundPush", 0.09, 1};
+    soundClick[] = {"\A3\ui_f\data\sound\RscButton\soundClick", 0.09, 1};
+    soundEscape[] = {"\A3\ui_f\data\sound\RscButton\soundEscape", 0.09, 1};
+    animTextureDefault = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
+    animTextureNormal = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
+    animTextureDisabled = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
+    animTextureOver = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\over_ca.paa";
+    animTextureFocused = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
+    animTexturePressed = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\down_ca.paa";
+    shadow = 0;
+    font = "RobotoCondensed";
+    sizeEx = 0.04;
+    offsetX = 0.003;
+    offsetY = 0.003;
+    offsetPressedX = 0.000;
+    offsetPressedY = 0.001;
+    borderSize = 0;
+};

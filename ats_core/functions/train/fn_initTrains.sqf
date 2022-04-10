@@ -96,8 +96,6 @@ ATRAIN_Object_Model_To_Type_Map append [
 
 [] call ATRAIN_fnc_rebuildArrayLookupIndexes;
 
-[] call ATRAIN_fnc_initTrainSound;
-
 if (isServer) then {
 	{ 
 		private _candidate = _x;

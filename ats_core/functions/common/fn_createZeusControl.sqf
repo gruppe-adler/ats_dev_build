@@ -24,14 +24,14 @@ _GUI_GRID_H = _GUI_GRID_H / 25;
 
 // control group
 private _controlGroup = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1];
-_controlGroup ctrlSetPosition [
+private _controlGroupPosition = [
     0,
     safeZoneY + 40 * _GUI_GRID_H,
     1,
     5 * _GUI_GRID_H
 ];
+_controlGroup ctrlSetPosition _controlGroupPosition;
 _controlGroup ctrlSetBackgroundColor [0,0,0,0.5];
-_controlGroup ctrlEnable false; // to prevent any click issues
 _controlGroup ctrlCommit 0;
 _controls pushBackUnique _controlGroup;
 
@@ -50,47 +50,34 @@ _bg ctrlCommit 0;
 _controls pushBackUnique _bg;
 
 
-private _text = _display ctrlCreate ["RscStructuredText", -1, _controlGroup];
-_text ctrlSetPosition [
-    0,
-    0,
-    1,
-    3 * _GUI_GRID_H
-];
-private _displayText = "Train " + str (_id);
-_text ctrlSetStructuredText parseText ("<t align='center' size='1'>" + _displayText + "</t>");
-_text ctrlEnable false; // to prevent any click issues
-_text ctrlCommit 0;
-_controls pushBackUnique _text;
-
 // speed
 private _speedText = _display ctrlCreate ["RscStructuredText", -1, _controlGroup];
 _speedText ctrlSetPosition [
     0,
     3 * _GUI_GRID_H,
-    15 * _GUI_GRID_W,
+    1,
     1 * _GUI_GRID_H
 ];
-private _displayText = "Speed: ";
+private _displayText =  "Train " + str (_id) + ": ";
 _speedText ctrlSetStructuredText parseText ("<t align='center' size='1'>" + _displayText + "</t>");
 _speedText ctrlEnable false; // to prevent any click issues
 _speedText ctrlCommit 0;
 _controls pushBackUnique _speedText;
 
 // Button Brake
-private _buttonBreak = _display ctrlCreate ["RscStructuredText", -1];
+private _buttonBreak = _display ctrlCreate ["RSC_ATRAINS_RscButton", -1, _controlGroup];
 _buttonBreak ctrlSetPosition [
-    0,
-    2 * _GUI_GRID_H,
-    1 * _GUI_GRID_W,
-    1 * _GUI_GRID_H
+    .1,
+    .1,
+    .09,
+    .07
 ];
 _buttonBreak ctrlsettext "B";
 _buttonBreak ctrlCommit 0;
 _buttonBreak setVariable ["ATRAIN_zeusTrainID", _id];
 _controls pushBackUnique _buttonBreak;
 
-_buttonBreak ctrlAddEventHandler ["MouseButtonClick", {
+_buttonBreak ctrlAddEventHandler ["MouseButtonDown", {
     params ["_ctrl"];
 
     private _id = _ctrl getVariable ["ATRAIN_zeusTrainID", -1];
@@ -102,6 +89,36 @@ _buttonBreak ctrlAddEventHandler ["MouseButtonClick", {
         _ctrl ctrlCommit 0;
     } else {
         _train setVariable ["ATRAIN_Remote_brake_Enabled", false, true];
+        _ctrl ctrlSetBackgroundColor [0,0,0,0.5];
+        _ctrl ctrlCommit 0;
+    };
+}];
+
+// Button Light
+private _buttonLight = _display ctrlCreate ["RSC_ATRAINS_RscButton", -1, _controlGroup];
+_buttonLight ctrlSetPosition [
+    .2,
+    .1,
+    .09,
+    .07
+];
+_buttonLight ctrlsettext "L";
+_buttonLight ctrlCommit 0;
+_buttonLight setVariable ["ATRAIN_zeusTrainID", _id];
+_controls pushBackUnique _buttonLight;
+
+_buttonLight ctrlAddEventHandler ["MouseButtonDown", {
+    params ["_ctrl"];
+
+    private _id = _ctrl getVariable ["ATRAIN_zeusTrainID", -1];
+    private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
+    if (isNull _train) exitWith {};
+    if (_train getVariable ["ATRAIN_Remote_Lights_Enabled", false]) then {
+        _train setVariable ["ATRAIN_Remote_Lights_Enabled", true, true];
+        _ctrl ctrlSetBackgroundColor [1,0,0,1];
+        _ctrl ctrlCommit 0;
+    } else {
+        _train setVariable ["ATRAIN_Remote_Lights_Enabled", false, true];
         _ctrl ctrlSetBackgroundColor [0,0,0,0.5];
         _ctrl ctrlCommit 0;
     };
@@ -129,23 +146,23 @@ _sliderAcceleration ctrlAddEventHandler ["SliderPosChanged", {
     private _id = _control getVariable ["ATRAIN_zeusTrainID", -1];
     private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
     if (isNull _train) exitWith {};
-    _train setVariable ["ATRAIN_targetSpeed", floor(_newValue/3.6), true];
+    _train setVariable ["ATRAIN_targetSpeed", _newValue, true];
 }];
 
  // Button Horn
-private _buttonHorn = _display ctrlCreate ["RscStructuredText", -1, _controlGroup];
+private _buttonHorn = _display ctrlCreate ["RSC_ATRAINS_RscButton", -1, _controlGroup];
 _buttonHorn ctrlSetPosition [
-    0.9,
-    2 * _GUI_GRID_H,
-    1 * _GUI_GRID_W,
-    1 * _GUI_GRID_H
+    .3,
+    .1,
+    .09,
+    .07
 ];
 _buttonHorn ctrlsettext "H";
 _buttonHorn ctrlCommit 0;
 _buttonHorn setVariable ["ATRAIN_zeusTrainID", _id];
 _controls pushBackUnique _buttonHorn;
 
-_buttonHorn ctrlAddEventHandler ["MouseButtonClick", {
+_buttonHorn ctrlAddEventHandler ["MouseButtonDown", {
     params ["_ctrl"];
 
     private _id = _ctrl getVariable ["ATRAIN_zeusTrainID", -1];
@@ -164,6 +181,11 @@ _buttonHorn ctrlAddEventHandler ["MouseButtonClick", {
 
 missionNamespace setVariable [_identifier, _controls];
 
+// animate in
+{
+    [_x, true] call ATRAIN_fnc_animateUI;
+} forEach _controls;
+
 [{
     params ["_args", "_handle"];
     _args params ["_train", "_identifier", "_speedText"];
@@ -171,7 +193,14 @@ missionNamespace setVariable [_identifier, _controls];
     if (isNull _train) exitWith { [_handle] call CBA_fnc_removePerFrameHandler; };
     if (isNull (player getVariable ["ATRAIN_interfaceOpened", objNull]) || (player getVariable ["ATRAIN_interfaceOpened", objNull] isNotEqualTo _train)) exitWith { 
         [_handle] call CBA_fnc_removePerFrameHandler;
-        { ctrlDelete _x; } forEach (missionNamespace getVariable [_identifier, []]);
+        
+        private _controls = (missionNamespace getVariable [_identifier, []]); 
+
+        // animate out
+        {
+            [_x, false] call ATRAIN_fnc_animateUI;
+        } forEach _controls;
+        
         [] call ATRAIN_fnc_disableTrainInputHandlers;
     };
 
@@ -179,7 +208,9 @@ missionNamespace setVariable [_identifier, _controls];
         private _color = "#ff00ff"; 
         private _targetSpeed = (_train getVariable ["ATRAIN_targetSpeed", 0]);
         private _actualSpeed = _train getVariable ["ATRAIN_Velocity", 0];
-        private _displayText = format ["%1 | %2 km/h", round (_targetSpeed*3.6), round (_actualSpeed*3.6)];
+        private _id = _train getVariable ["ATRAIN_trainID", 0];
+        private _title =  "Train " + str (_id) + ": ";
+        private _displayText = format ["%1 %2 | %3 km/h", _title, (_targetSpeed*3.6) toFixed 1, (_actualSpeed*3.6) toFixed 1];
         private _color = "#ff3333";
         _speedText ctrlSetStructuredText parseText ("<t align='center' size='1' color='" + _color + "'>" + _displayText + "</t>");
         _speedText ctrlCommit 0;
@@ -224,7 +255,7 @@ missionNamespace setVariable [_identifier, _controls];
         };
     };
     
-    private _displayText = format ["%1 | %2 km/h", round (_targetSpeed*3.6), round (_actualSpeed*3.6)];
+    private _displayText = format ["%1 | %2 km/h", (_targetSpeed*3.6) toFixed 1, (_actualSpeed*3.6) toFixed 1];
     _speedText ctrlSetStructuredText parseText ("<t align='center' size='1' color='" + _color + "'>" + _displayText + "</t>");
     _speedText ctrlCommit 0;
 
