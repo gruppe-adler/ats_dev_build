@@ -26,8 +26,11 @@ private _trainCarsToDetach = [];
 	};
 } forEach _trainCars;
 
-private _detachedTrain = [_trainCarsToDetach select 0] call ATRAIN_fnc_createTrainCar;
-[_trainCar, _trainsCarToDetach select 0, false] call ATRAIN_fnc_clutchConnect;
+if (count _trainCarsToDetach < 1) exitWith { hint "no cars to detach"; };
+_trainCarsToDetach params ["_trainCarToDetach"];
+
+private _detachedTrain = [_trainCarToDetach] call ATRAIN_fnc_createTrainCar;
+[_trainCar, _trainCarToDetach, false] call ATRAIN_fnc_clutchConnect;
 
 
 _detachedTrain setVariable ["ATRAIN_Remote_Train_Cars", _trainCarsToDetach, true];

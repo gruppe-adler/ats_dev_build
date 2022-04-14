@@ -60,32 +60,31 @@ if(_trainDerailedSimulated) exitWith {};
 			_currentDrawDirection set [2,0];
 		};
 		
-		// [0.954432,-0.297411,0.0246446] [0,0,1] 0.697679 0.697679 [0.95115,-0.307642,0.0258808]
-		/*
-		diag_log parseText format [
-			"ATS draw:<br/> %1 <br/>%2 <br/>%3 <br/>%4 <br/>%5 <br/>%6", 
-			_currentDrawDirection, 
-			_currentDrawVectorUp,
-			_lastDrawDirection vectorMultiply _trainSpeed, 
-			_currentDrawDirection vectorMultiply _trainSpeed, 
-			_lastDrawDirection,
-			_currentDrawDirection,
-			_lastDrawVectorUp,
-			_currentDrawVectorUp
-		];
-		*/
-		// _trainCar setVectorDirAndUp [_currentDrawDirection,_currentDrawVectorUp];
-		_trainCar setVelocityTransformation [
-			_lastDrawPosition, 
-			_currentDrawPosition, 
-			_lastDrawDirection vectorMultiply _trainSpeed, 
-			_currentDrawDirection vectorMultiply _trainSpeed, 
-			_lastDrawDirection, 
-			_currentDrawDirection, 
-			_lastDrawVectorUp, 
-			_currentDrawVectorUp, 
-			linearConversion [_lastSeen, (missionNamespace getVariable ["ATS_trainSimulation_Interval", 1]), _timeSinceLastSeen, 0, 1]
-		];
+		if(_distanceFromLastToNewPosition > 0.01) then {
+			_trainCar setVelocityTransformation [
+				_lastDrawPosition, 
+				_currentDrawPosition, 
+				_lastDrawDirection vectorMultiply _trainSpeed, 
+				_currentDrawDirection vectorMultiply _trainSpeed, 
+				_lastDrawDirection, 
+				_currentDrawDirection, 
+				_lastDrawVectorUp, 
+				_currentDrawVectorUp, 
+				linearConversion [_lastSeen, (missionNamespace getVariable ["ATS_trainSimulation_Interval", 1]), _timeSinceLastSeen, 0, 1]
+			];
+		} else {
+			_trainCar setVelocityTransformation [
+				_currentDrawPosition, 
+				_currentDrawPosition, 
+				[0,0,0], 
+				[0,0,0], 
+				_currentDrawDirection, 
+				_currentDrawDirection, 
+				_currentDrawVectorUp, 
+				_currentDrawVectorUp, 
+				1
+			];
+		};
 		// linearConversion [_lastSeen, _currentTime+0.1, _currentTime, 0, 1]
 		
 		_trainCar setVariable ["ATRAIN_Current_Draw_Position", _currentDrawPosition];

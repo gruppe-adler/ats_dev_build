@@ -172,6 +172,7 @@ class CfgFunctions
         {
             file = "ats\core\functions\train\clutch";
             class clutchConnect{};
+            class clutchCreate{};
 
         };
         class TrainControls

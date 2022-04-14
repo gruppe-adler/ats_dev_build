@@ -40,7 +40,7 @@ if(_attachToFront) then {
 	private _trainRearCar = [_train] call ATRAIN_fnc_findRearCar;
 	private _trainRearCarLocal = [_trainRearCar] call ATRAIN_fnc_getTrainCar;
 
-	[_trainCar, _trainFrontCarLocal, true] call ATRAIN_fnc_clutchConnect;
+	[_trainCar, _trainRearCarLocal, true] call ATRAIN_fnc_clutchConnect;
 	
 	private _distanceToFront = _trainRearCarLocal distance _attachmentFrontCarLocal;
 	private _distanceToRear = _trainRearCarLocal distance _attachmentRearCarLocal;
