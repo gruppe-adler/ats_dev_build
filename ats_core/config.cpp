@@ -168,6 +168,12 @@ class CfgFunctions
             class getCargo{};
 
         };
+        class TrainClutch
+        {
+            file = "ats\core\functions\train\clutch";
+            class clutchConnect{};
+
+        };
         class TrainControls
         {
             file = "ats\core\functions\train\controls";
@@ -199,8 +205,6 @@ class CfgFunctions
             class cleanUpNodePath{};
             class drawEventHandler{};
             class drawTrain{};
-            class handleSimulationNetworkUpdates{};
-            class handleVelocityNetworkUpdates{};
             class setWheelSpeed{};
             class simulateTrain{};
             class simulateTrainAttachment{};

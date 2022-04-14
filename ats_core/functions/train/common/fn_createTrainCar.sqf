@@ -31,6 +31,8 @@ _trainCar setVariable ["ATRAIN_Remote_Is_Train_Car",true,true];
 _trainCar setVariable ["ATRAIN_Remote_Killed",!alive _trainCar,true];
 _trainCar setVariable ["ATRAIN_Static_Position",[getPosASLVisual _trainCar, [vectorDirVisual _trainCar, vectorUpVisual _trainCar]], true];
 
+[_trainCar] call ATRAIN_fnc_clutchCreate;
+
 if (_isDrivable) then {
 	// _trainCar enableSimulationGlobal false;
 	

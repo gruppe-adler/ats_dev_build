@@ -148,12 +148,10 @@ if (isServer) then {
 			private _registeredTrains = missionNamespace getVariable ["ATRAIN_Registered_Trains",[]];
 			{
 				if(_x getVariable ["ATRAIN_Calculations_Queued",true]) then {
-					// [_x] call ATRAIN_fnc_handleVelocityNetworkUpdates;
 					[_x] call ATRAIN_fnc_simulateTrainVelocity;
 					[_x] call ATRAIN_fnc_simulateTrain;
 					[_x] call ATRAIN_fnc_simulateTrainAttachment;
 					[_x] call ATRAIN_fnc_simulateTrainSound;
-					// [_x] call ATRAIN_fnc_handleSimulationNetworkUpdates;
 					_x setVariable ["ATRAIN_Calculations_Queued",false];
 				};
 			} forEach _registeredTrains;

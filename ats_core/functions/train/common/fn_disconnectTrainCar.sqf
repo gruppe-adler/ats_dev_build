@@ -27,6 +27,9 @@ private _trainCarsToDetach = [];
 } forEach _trainCars;
 
 private _detachedTrain = [_trainCarsToDetach select 0] call ATRAIN_fnc_createTrainCar;
+[_trainCar, _trainsCarToDetach select 0, false] call ATRAIN_fnc_clutchConnect;
+
+
 _detachedTrain setVariable ["ATRAIN_Remote_Train_Cars", _trainCarsToDetach, true];
 [_detachedTrain] call ATRAIN_fnc_rebuildTrain;
 
