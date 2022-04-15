@@ -115,33 +115,6 @@ class CfgVehicles {
 				passThrough = 1;
 				explosionShielding = 2;
 			};
-
-			/*
-			class Hit_Light_L {
-				name = "light_l";
-				hitpoint = "Light_L";
-				source = "Hit";
-				raw = 1;
-				armor=0.125; 
-				passThrough=0;
-			};
-			class Hit_Light_R:Hit_Light_L {
-				name = "light_r";
-				hitpoint = "Light_R";
-			};
-			class Hit_Right_M:Hit_Light_L {
-				name = "Right_M";
-				hitpoint = "Right_M";
-			};
-			class Hit_Light_back_L:Hit_Light_L {
-				name = "Light_back_L";
-				hitpoint = "Light_back_L";
-			};
-			class Hit_Light_back_R:Hit_Light_L {
-				name = "Light_back_R";
-				hitpoint = "Light_back_R";
-			};
-			*/
 		};
 
 		class Damage // damage changes material in specific places (visual in hitPoint)

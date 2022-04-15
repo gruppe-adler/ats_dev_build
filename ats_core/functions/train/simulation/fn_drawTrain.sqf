@@ -64,22 +64,20 @@ if(_trainDerailedSimulated) exitWith {};
 			systemChat "dragged";
 		};
 
-		if(_distanceFromLastToNewPosition > 0.01) then {
-			_trainCar setVelocityTransformation [
-				_lastDrawPosition, 
-				_currentDrawPosition, 
-				_lastDrawDirection vectorMultiply _trainSpeed, 
-				_currentDrawDirection vectorMultiply _trainSpeed, 
-				_lastDrawDirection, 
-				_currentDrawDirection, 
-				_lastDrawVectorUp, 
-				_currentDrawVectorUp, 
-				linearConversion [_lastSeen, (missionNamespace getVariable ["ATS_trainSimulation_Interval", 1]), _timeSinceLastSeen, 0, 1]
-			];
-		} else {
-			_trainCar setPosASL _lastDrawPosition;
-			_trainCar setVectorUp _lastDrawVectorUp;
-		};
+		_currentDrawPosition set [2, _currentDrawPosition#2 + random 0.001];
+
+		_trainCar setVelocityTransformation [
+			_lastDrawPosition, 
+			_currentDrawPosition, 
+			_lastDrawDirection vectorMultiply _trainSpeed, 
+			_currentDrawDirection vectorMultiply _trainSpeed, 
+			_lastDrawDirection, 
+			_currentDrawDirection, 
+			_lastDrawVectorUp, 
+			_currentDrawVectorUp, 
+			linearConversion [_lastSeen, (missionNamespace getVariable ["ATS_trainSimulation_Interval", 1]), _timeSinceLastSeen, 0, 1]
+		];
+		
 		// linearConversion [_lastSeen, _currentTime+0.1, _currentTime, 0, 1]
 		
 		_trainCar setVariable ["ATRAIN_Current_Draw_Position", _currentDrawPosition];

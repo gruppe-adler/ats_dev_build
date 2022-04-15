@@ -75,12 +75,13 @@ _buttonBreak ctrlSetPosition [
 _buttonBreak ctrlsettext "B";
 _buttonBreak ctrlCommit 0;
 _buttonBreak setVariable ["ATRAIN_zeusTrainID", _id];
+_buttonBreak ctrlEnable true;
 _controls pushBackUnique _buttonBreak;
 
 _buttonBreak ctrlAddEventHandler ["MouseButtonDown", {
-    params ["_ctrl"];
+    params ["_ctrl", "_button"];
 
-    private _id = _ctrl getVariable ["ATRAIN_zeusTrainID", -1];
+    private _id = _button getVariable ["ATRAIN_zeusTrainID", -1];
     private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
     if (isNull _train) exitWith {};
     if (_train getVariable ["ATRAIN_Remote_brake_Enabled", false]) then {
@@ -105,12 +106,13 @@ _buttonLight ctrlSetPosition [
 _buttonLight ctrlsettext "L";
 _buttonLight ctrlCommit 0;
 _buttonLight setVariable ["ATRAIN_zeusTrainID", _id];
+_buttonLight ctrlEnable true;
 _controls pushBackUnique _buttonLight;
 
 _buttonLight ctrlAddEventHandler ["MouseButtonDown", {
-    params ["_ctrl"];
+    params ["_ctrl", "_button"];
 
-    private _id = _ctrl getVariable ["ATRAIN_zeusTrainID", -1];
+    private _id = _button getVariable ["ATRAIN_zeusTrainID", -1];
     private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
     if (isNull _train) exitWith {};
     if (_train getVariable ["ATRAIN_Remote_Lights_Enabled", false]) then {
@@ -163,9 +165,9 @@ _buttonHorn setVariable ["ATRAIN_zeusTrainID", _id];
 _controls pushBackUnique _buttonHorn;
 
 _buttonHorn ctrlAddEventHandler ["MouseButtonDown", {
-    params ["_ctrl"];
+    params ["_ctrl", "_button"];
 
-    private _id = _ctrl getVariable ["ATRAIN_zeusTrainID", -1];
+    private _id = _button getVariable ["ATRAIN_zeusTrainID", -1];
     private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
     if (isNull _train) exitWith {};
     if (_train getVariable ["ATRAIN_Remote_Horn_Enabled", false] == false) then {
@@ -193,9 +195,12 @@ missionNamespace setVariable [_identifier, _controls];
     if (isNull _train) exitWith { [_handle] call CBA_fnc_removePerFrameHandler; };
     if (isNull (player getVariable ["ATRAIN_interfaceOpened", objNull]) || (player getVariable ["ATRAIN_interfaceOpened", objNull] isNotEqualTo _train)) exitWith { 
         [_handle] call CBA_fnc_removePerFrameHandler;
-        
-        private _controls = (missionNamespace getVariable [_identifier, []]); 
 
+        // stop acceleration
+        _train setVariable ["ATRAIN_Remote_Movement_Direction", 0, true];
+        
+        // dismiss UI
+        private _controls = (missionNamespace getVariable [_identifier, []]); 
         // animate out
         {
             [_x, false] call ATRAIN_fnc_animateUI;

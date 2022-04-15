@@ -23,7 +23,7 @@ private _clutches = [];
     _clutches pushBackUnique _x;
 } forEach _clutchCandidates;
 
-_clutches params ["_clutchA", "_clutchB"];
+_clutches params [["_clutchA", objNull], ["_clutchB", objNull]];
 
 
 private _color = "#(argb,8,8,3)color(1,0.1,0.1,1.000000,ca)";

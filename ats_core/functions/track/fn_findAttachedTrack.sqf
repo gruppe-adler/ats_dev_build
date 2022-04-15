@@ -3,29 +3,36 @@ private _trackDef = [_track] call ATRAIN_fnc_getTrackDefinition;
 if(count _trackDef == 0) exitWith {[];};
 _trackDef params ["_className","_centerOffset","_isIntersection","_isTermination",["_heightOffset",0]];
 
+
 // create switch lever for switch handling, let server manage
 if (isServer && _isIntersection) then {
 
-	if (!isNull (_track getVariable ["ATRAIN_lever", objNull])) exitWith {};
+	private _switches = missionNamespace getVariable ["ATRAIN_Registered_Switches", []];
+	if (_switches find _track > -1) exitWith {};
 	diag_log "creating switch";
 	private _lever = "Land_Track_01_switch_F" createVehicle [0,0,0];
 	private _position = (getPos _track) findEmptyPosition [0,10,"Land_Track_01_switch_F"];
 	_lever setPos _position; 
 	_lever setDir (getDir _track);
 	_lever setVariable ["ATRAIN_switch", -1, true];
-	_track setVariable ["ATRAIN_lever", _lever, true];
 
 
 	private _visualizer = "Sign_Sphere100cm_Geometry_F" createVehicle [0,0,0]; 
-	_visualizer setObjectTextureGlobal [0,"#(argb,8,8,3)color(.1,1,0.1,1.000000,ca)"];
+	_visualizer setObjectTextureGlobal [0,"#(argb,8,8,3)color(0.1,1,0.1,1.000000,ca)"];
 	_visualizer attachTo [_lever, [0,0,0]];
 	_lever setVariable ["ATRAIN_switchVisualizer", _visualizer, true];
 
 
 	[_lever] remoteExec ["ATRAIN_fnc_switchAction", [0,-2] select isDedicated, true];
 
-	{ _x addCuratorEditableObjects [[_lever], true]; } forEach allCurators;
+	private _levers = missionNamespace getVariable ["ATRAIN_Registered_Levers", []];
+	_levers pushBackUnique _lever;
+	missionNamespace setVariable ["ATRAIN_Registered_Levers", _levers, true];
+
+	_switches pushBackUnique _track;
+	missionNamespace setVariable ["ATRAIN_Registered_switches", _switches, true];
 };
+
 
 private _trackEndPoints = [_track] call ATRAIN_fnc_getTrackEndpoints;
 private _startPointIndex = 0;

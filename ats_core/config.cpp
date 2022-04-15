@@ -120,6 +120,7 @@ class CfgFunctions
             class findPathToNearestNode{};
             class findAttachedTrack{};
             class switchAction{};
+            class getSwitch{};
         };
         class Train
         {

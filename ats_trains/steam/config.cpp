@@ -47,6 +47,12 @@ class CfgVehicles {
                 frequency = "1";
                 volume = "CustomSoundController3";
             };
+            class train_brake
+            {
+                sound[] = {"\ats\core\sounds\train_brake1.ogg", 0, 1, 800};
+                frequency = "1";
+                volume = "CustomSoundController4";
+            };
         };
 	};
 	
@@ -77,6 +83,12 @@ class CfgVehicles {
                 sound[] = {"\ats\core\sounds\train_track.ogg", 2, 1, 800};
                 frequency = "1";
                 volume = "CustomSoundController3";
+            };
+            class train_brake
+            {
+                sound[] = {"\ats\core\sounds\train_brake1.ogg", 0, 1, 800};
+                frequency = "1";
+                volume = "CustomSoundController4";
             };
         };
 	};

@@ -15,14 +15,11 @@ if(_trainVelocity < 0) then {
 	};
 
 	// switch management
-	private _track = [_rearCar] call ATRAIN_fnc_getTrackUnderTrainCar;
-	private _lever = _track getVariable ["ATRAIN_lever", objNull];
-	systemChat str _lever;
+	private _lever = [getPosWorld _rearCar] call ATRAIN_fnc_getSwitch;
 	if (!isNull _lever) then {
+		systemChat str _lever;
 		private _leverPosition = _lever getVariable ["ATRAIN_switch", -1];
-		if (_train getVariable ["ATRAIN_Remote_Turn_Direction", 0] == 0) then {
-			_train setVariable ["ATRAIN_Remote_Turn_Direction", _leverPosition, true];
-		};
+		_train setVariable ["ATRAIN_Remote_Turn_Direction", _leverPosition, true];
 	};
 
 	private _rearCarLength = _rearCar getVariable ["ATRAIN_Remote_Car_Length",6];
@@ -45,10 +42,12 @@ if(_trainVelocity < 0) then {
 		};
 	} forEach _newCars;
 
+	/*
 	hintSilent parseText format [
                 "New Cars rear: %1",
                 _newCars
             ];
+    */
 };
 
 
@@ -64,15 +63,13 @@ if(_trainVelocity > 0) then {
 	};
 
 	// switch management
-	private _track = [_frontCar] call ATRAIN_fnc_getTrackUnderTrainCar;
-	private _lever = _track getVariable ["ATRAIN_lever", objNull];
-	systemChat str _lever;
+	private _lever = [getPosWorld _frontCar] call ATRAIN_fnc_getSwitch;
 	if (!isNull _lever) then {
+		systemChat str _lever;
 		private _leverPosition = _lever getVariable ["ATRAIN_switch", -1];
-		if (_train getVariable ["ATRAIN_Remote_Turn_Direction", 0] == 0) then {
-			_train setVariable ["ATRAIN_Remote_Turn_Direction", _leverPosition, true];
-		};
+		_train setVariable ["ATRAIN_Remote_Turn_Direction", _leverPosition, true];		
 	};
+	
 
 	private _frontCarLength = _frontCar getVariable ["ATRAIN_Remote_Car_Length",6];
 	private _intersectStartASL = _frontCarPosASL vectorAdd (_frontCarSearchVectorDir vectorMultiply (_frontCarLength*_carLengthMultiplier)) vectorAdd [0,0,3];
@@ -94,8 +91,10 @@ if(_trainVelocity > 0) then {
 		};
 	} forEach _newCars;
 
+	/*
 	hintSilent parseText format [
                 "New Cars front: %1<br/>",
                 _newCars
             ];
+    */
 };

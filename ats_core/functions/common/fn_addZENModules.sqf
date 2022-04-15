@@ -80,6 +80,7 @@
           }];
 
           _curator addCuratorEditableObjects [(missionNamespace getVariable ["ATRAIN_Registered_TrainEngines", []]), false];
+          _curator addCuratorEditableObjects [(missionNamespace getVariable ["ATRAIN_Registered_Levers", []]), false];
 
      } forEach allcurators;
      
