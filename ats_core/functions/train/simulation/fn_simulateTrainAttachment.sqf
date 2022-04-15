@@ -15,7 +15,7 @@ if(_trainVelocity < 0) then {
 	};
 
 	// switch management
-	private _lever = [getPosWorld _rearCar] call ATRAIN_fnc_getSwitch;
+	private _lever = [getPos _rearCar] call ATRAIN_fnc_getSwitch;
 	if (!isNull _lever) then {
 		systemChat str _lever;
 		private _leverPosition = _lever getVariable ["ATRAIN_switch", -1];
@@ -63,7 +63,7 @@ if(_trainVelocity > 0) then {
 	};
 
 	// switch management
-	private _lever = [getPosWorld _frontCar] call ATRAIN_fnc_getSwitch;
+	private _lever = [getPos _frontCar] call ATRAIN_fnc_getSwitch;
 	if (!isNull _lever) then {
 		systemChat str _lever;
 		private _leverPosition = _lever getVariable ["ATRAIN_switch", -1];
