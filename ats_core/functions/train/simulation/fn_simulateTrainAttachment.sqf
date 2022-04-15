@@ -17,8 +17,9 @@ if(_trainVelocity < 0) then {
 	// switch management
 	private _track = [_rearCar] call ATRAIN_fnc_getTrackUnderTrainCar;
 	private _lever = _track getVariable ["ATRAIN_lever", objNull];
+	systemChat str _lever;
 	if (!isNull _lever) then {
-		private _leverPosition = [_lever] getVariable ["ATRAIN_switch", -1];
+		private _leverPosition = _lever getVariable ["ATRAIN_switch", -1];
 		if (_train getVariable ["ATRAIN_Remote_Turn_Direction", 0] == 0) then {
 			_train setVariable ["ATRAIN_Remote_Turn_Direction", _leverPosition, true];
 		};
@@ -61,6 +62,18 @@ if(_trainVelocity > 0) then {
 	if(_frontCarIsBackwards) then {
 		_frontCarSearchVectorDir = _frontCarSearchVectorDir vectorMultiply -1;
 	};
+
+	// switch management
+	private _track = [_frontCar] call ATRAIN_fnc_getTrackUnderTrainCar;
+	private _lever = _track getVariable ["ATRAIN_lever", objNull];
+	systemChat str _lever;
+	if (!isNull _lever) then {
+		private _leverPosition = _lever getVariable ["ATRAIN_switch", -1];
+		if (_train getVariable ["ATRAIN_Remote_Turn_Direction", 0] == 0) then {
+			_train setVariable ["ATRAIN_Remote_Turn_Direction", _leverPosition, true];
+		};
+	};
+
 	private _frontCarLength = _frontCar getVariable ["ATRAIN_Remote_Car_Length",6];
 	private _intersectStartASL = _frontCarPosASL vectorAdd (_frontCarSearchVectorDir vectorMultiply (_frontCarLength*_carLengthMultiplier)) vectorAdd [0,0,3];
 	private _intersectEndASL = _intersectStartASL vectorAdd [0,0,-3];

@@ -32,4 +32,4 @@ if (_connect) then {
     _color = "#(argb,8,8,3)color(0.1,1,0.1,1.000000,ca)";
 };
 
-{ _x setObjectTextureGlobal [0, _color]; } forEach [_clutchA, _clutchB];
+{ if (!isNull _x) then { _x setObjectTextureGlobal [0, _color]; }; } forEach [_clutchA, _clutchB];

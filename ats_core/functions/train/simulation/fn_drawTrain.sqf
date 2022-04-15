@@ -60,6 +60,10 @@ if(_trainDerailedSimulated) exitWith {};
 			_currentDrawDirection set [2,0];
 		};
 		
+		if (_trainCar getVariable ["ATRAIN_curatorMoved", false]) exitWith {
+			systemChat "dragged";
+		};
+
 		if(_distanceFromLastToNewPosition > 0.01) then {
 			_trainCar setVelocityTransformation [
 				_lastDrawPosition, 
@@ -73,17 +77,8 @@ if(_trainDerailedSimulated) exitWith {};
 				linearConversion [_lastSeen, (missionNamespace getVariable ["ATS_trainSimulation_Interval", 1]), _timeSinceLastSeen, 0, 1]
 			];
 		} else {
-			_trainCar setVelocityTransformation [
-				_currentDrawPosition, 
-				_currentDrawPosition, 
-				[0,0,0], 
-				[0,0,0], 
-				_currentDrawDirection, 
-				_currentDrawDirection, 
-				_currentDrawVectorUp, 
-				_currentDrawVectorUp, 
-				1
-			];
+			_trainCar setPosASL _lastDrawPosition;
+			_trainCar setVectorUp _lastDrawVectorUp;
 		};
 		// linearConversion [_lastSeen, _currentTime+0.1, _currentTime, 0, 1]
 		

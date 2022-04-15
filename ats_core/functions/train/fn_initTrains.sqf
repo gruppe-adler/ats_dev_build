@@ -147,7 +147,7 @@ if (isServer) then {
 		while {true} do {
 			private _registeredTrains = missionNamespace getVariable ["ATRAIN_Registered_Trains",[]];
 			{
-				if(_x getVariable ["ATRAIN_Calculations_Queued",true]) then {
+				if(_x getVariable ["ATRAIN_Calculations_Queued",true] && !isGamePaused && isGameFocused) then {
 					[_x] call ATRAIN_fnc_simulateTrainVelocity;
 					[_x] call ATRAIN_fnc_simulateTrain;
 					[_x] call ATRAIN_fnc_simulateTrainAttachment;

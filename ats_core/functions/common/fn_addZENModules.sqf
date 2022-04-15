@@ -21,16 +21,62 @@
                };
 
                [{
-                    (
-                         count (curatorSelected select 0) +
-                         count (curatorSelected select 1) +
-                         count (curatorSelected select 2) +
-                         count (curatorSelected select 3)
-                     ) == 0
+                    (flatten curatorSelected) isEqualto []
                  },
                  {
                     player setVariable ["ATRAIN_interfaceOpened", objNull]; // closes zeus control
                  }, []] call CBA_fnc_waitUntilAndExecute;
+          }];
+
+          (findDisplay 312) displayAddEventhandler ["MouseButtonDown", {
+               uiNamespace setVariable ["ATS_mouseButtonDown", true];
+          }];
+
+          (findDisplay 312) displayAddEventhandler ["MouseButtonUp", {
+               uiNamespace setVariable ["ATS_mouseButtonDown", false];
+               private _moveCache = missionNamespace setVariable ["ATRAIN_curatorMoveCache", _trainCar];
+               if (!isNull _moveCache) then {
+                    _moveCache setVariable ["ATRAIN_curatorMoved", false];
+                    missionNamespace setVariable ["ATRAIN_curatorMoveCache", objNull];
+               };
+          }];
+
+          (findDisplay 312) displayAddEventhandler ["MouseMoving", {
+               params ["_display", "_xPos", "_yPos"];
+
+               if (count (curatorSelected#0) > 0 && uiNamespace getVariable ["ATS_mouseButtonDown", false]) then {
+                    private _trainCar = [_entity] call ATRAIN_fnc_isTrain;
+                    if (isNull _trainCar) exitWith {};
+
+                    private _trainDef = [_entity] call ATRAIN_fnc_getTrainDefinition;
+                    _trainCar setVariable ["ATRAIN_curatorMoved", true];
+                    missionNamespace setVariable ["ATRAIN_curatorMoveCache", _trainCar];
+                    systemChat "dragging";
+               };
+          }];
+
+          (findDisplay 312) displayAddEventhandler ["MouseHolding", {
+               params ["_display", "_xPos", "_yPos"];
+
+               if (count (curatorSelected#0) > 0 && uiNamespace getVariable ["ATS_mouseButtonDown", false]) then {
+                    private _trainCar = [_entity] call ATRAIN_fnc_isTrain;
+                    if (isNull _trainCar) exitWith {};
+
+                    private _trainDef = [_entity] call ATRAIN_fnc_getTrainDefinition;
+                    _trainCar setVariable ["ATRAIN_curatorMoved", true];
+                    missionNamespace setVariable ["ATRAIN_curatorMoveCache", _trainCar];
+                    systemChat "dragging";
+               };
+          }];
+
+
+          _curator addEventHandler ["CuratorObjectEdited", {
+               params ["_curator", "_entity"];
+
+               
+               _trainDef params ["_className", "_isDrivable", "_isRideable"];
+               player setVariable ["ATRAIN_interfaceOpened", objNull]; // closes zeus control
+               
           }];
 
           _curator addCuratorEditableObjects [(missionNamespace getVariable ["ATRAIN_Registered_TrainEngines", []]), false];

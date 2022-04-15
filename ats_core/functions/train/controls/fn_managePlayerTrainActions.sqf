@@ -36,7 +36,12 @@ if(!isNull _trainFound && count ATRAIN_Player_Actions == 0) then {
 	};
 
 	private _mainEngine = _trainFound getVariable ["ATRAIN_Current_Train", _trainFound];
-	if((_mainEngine getVariable ["ATRAIN_Velocity",0]) == 0) then {
+	private _clutchFront = _trainFound getVariable ["ATRAIN_clutchFront", objNull];
+	private _clutchBack = _trainFound getVariable ["ATRAIN_clutchBack", objNull];
+	private _clutchFrontNear = player distance _clutchFront < 2;
+	private _clutchBackNear = player distance _clutchBack < 2;
+
+	if((_mainEngine getVariable ["ATRAIN_Velocity",0]) == 0 && (_clutchFrontNear || _clutchBackNear)) then {
 		private _disconnectAction = player addAction ["Disconnect Car", {
 			(_this select 3) params ["_trainCar"];
 			[_trainCar] call ATRAIN_fnc_disconnectTrainCar;
