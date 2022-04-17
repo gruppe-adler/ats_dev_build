@@ -1,8 +1,10 @@
-#include "ats\core\CfgRscDefines.hpp"
+class ctrlStatic;
+class ctrlStaticPictureKeepAspect;
+class ctrlButton;
+class ctrlSliderH;
+class ctrlControlsGroupNoScrollbars;
 
-
-
-
+#include "CfgRscDefines.hpp"
 
 class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars 
 {   
@@ -29,7 +31,7 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             tooltip = "Picture"; //--- ToDo: Localize;
             text = "ats\core\gui\train.paa";
         };
-        class ATRAINS_gui_slider: ctrlSlider
+        class ATRAINS_gui_slider: ctrlSliderH
         {
             idc = IDC_GUI_SLIDER;
             x = DIALOG_WIDTH - SLIDER_HEIGHT;
@@ -45,6 +47,15 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             arrowFull = "\A3\ui_f\data\gui\cfg\slider\arrowFull_ca.paa";
             border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
             thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
+        };
+        class ATRAINS_gui_speed: ctrlStatic 
+        {
+            idc = IDC_GUI_SPEED;
+            x = BUTTONS_X + BUTTON_DIMEN;
+            y = 0;
+            w = BUTTON_DIMEN;
+            h = BUTTON_DIMEN;
+            text = "0 kmh";
         };
         class ATRAINS_gui_buttonForward_image: ctrlStaticPictureKeepAspect 
         {

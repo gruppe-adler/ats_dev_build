@@ -1,4 +1,4 @@
-#include "ats\core\CfgRscDefines.hpp"
+#include "..\..\CfgRscDefines.hpp"
 
 params ["_train"];
 
@@ -20,7 +20,7 @@ if (isNull _display) exitWith { hint "no Zeus Display found"; };
 private _control = _display ctrlCreate ["ATRAINS_CuratorDisplay", -1];
 _control ctrlSetPosition [safezoneX,safeZoneY+safeZoneH-DIALOG_HEIGHT,safeZoneX+safeZoneW,DIALOG_HEIGHT];
 _control ctrlCommit 0;
-private _speedText = controlNull;
+private _speedText = _control controlsGroupCtrl IDC_GUI_SPEED;
 
 [_control, true] call ATRAIN_fnc_animateUI;
 

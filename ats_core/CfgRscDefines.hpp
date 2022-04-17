@@ -1,10 +1,3 @@
-class ctrlStatic;
-class ctrlStaticPictureKeepAspect ;
-class ctrlButton;
-class ctrlSlider;
-class ctrlSliderH;
-class ctrlControlsGroupNoScrollbars;
-
 #define GRID_W (pixelW * pixelGrid)
 #define GRID_H (pixelH * pixelGrid)
 #define QUOTE(var1) #var1
@@ -28,6 +21,7 @@ class ctrlControlsGroupNoScrollbars;
 #define IDC_GUI_BG 1000
 #define IDC_GUI_IMAGE 1001
 #define IDC_GUI_SLIDER 1002
+#define IDC_GUI_SPEED 1003
 
 #define IDC_GUI_FORWARD_IMG 2001
 #define IDC_GUI_FORWARD_BTN 2002
@@ -43,3 +37,4 @@ class ctrlControlsGroupNoScrollbars;
 
 #define IDC_GUI_LIGHTS_IMG 2009
 #define IDC_GUI_LIGHTS_BTN 2010
+

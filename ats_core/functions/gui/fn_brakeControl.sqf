@@ -5,10 +5,10 @@ private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) 
 if (isNull _train) exitWith {};
 if (_train getVariable ["ATRAIN_Remote_brake_Enabled", false]) then {
     _train setVariable ["ATRAIN_Remote_brake_Enabled", true, true];
-    _ctrl ctrlsettext = "ats\core\gui\brake_on.paa";
+    _ctrl ctrlsettext "ats\core\gui\brake_on.paa";
     _ctrl ctrlCommit 0;
 } else {
     _train setVariable ["ATRAIN_Remote_brake_Enabled", false, true];
-    _ctrl ctrlsettext = "ats\core\gui\brake_off.paa";
+    _ctrl ctrlsettext "ats\core\gui\brake_off.paa";
     _ctrl ctrlCommit 0;
 };
