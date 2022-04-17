@@ -1,6 +1,6 @@
 params ["_ctrl", "_button"];
 
-private _id = _button getVariable ["ATRAIN_zeusTrainID", -1];
+private _id = uiNamespace getVariable ["ATRAIN_interfaceTrainID", -1];
 private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
 if (isNull _train) exitWith {};
 if (_train getVariable ["ATRAIN_Remote_Lights_Enabled", false]) then {

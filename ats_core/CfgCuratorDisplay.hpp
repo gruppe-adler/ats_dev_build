@@ -1,7 +1,6 @@
 class ctrlStatic;
 class ctrlStaticPictureKeepAspect;
 class ctrlButton;
-class ctrlSliderH;
 class ctrlControlsGroupNoScrollbars;
 
 #include "CfgRscDefines.hpp"
@@ -31,7 +30,7 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             tooltip = "Picture"; //--- ToDo: Localize;
             text = "ats\core\gui\train.paa";
         };
-        class ATRAINS_gui_slider: ctrlSliderH
+        class ATRAINS_gui_slider
         {
             idc = IDC_GUI_SLIDER;
             x = DIALOG_WIDTH - SLIDER_HEIGHT;
@@ -42,18 +41,30 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             sliderRange[] = {0,80};
             sliderStep = 0.5;
             sliderPosition = 0;
-            style = SL_TEXTURES;
+            deletable = 0;
+            fade = 0;
+            type = CT_XSLIDER ;
+            color[] = {1,1,1,0.6};
+            colorActive[] = {1,1,1,1};
+            colorDisable[] = {1,1,1,0.4};
+            style = SL_VERT + SL_TEXTURES;
+            shadow = 0;
+            colorDisabled[] = {1,1,1,0.2};
             arrowEmpty = "\A3\ui_f\data\gui\cfg\slider\arrowEmpty_ca.paa";
             arrowFull = "\A3\ui_f\data\gui\cfg\slider\arrowFull_ca.paa";
             border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
             thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
+            tooltipColorText[] = {1,1,1,1};
+            tooltipColorBox[] = {1,1,1,1};
+            tooltipColorShade[] = {0,0,0,0.65};
+            toolTip = "Thrust";
         };
         class ATRAINS_gui_speed: ctrlStatic 
         {
             idc = IDC_GUI_SPEED;
-            x = BUTTONS_X + BUTTON_DIMEN;
+            x = 0;
             y = 0;
-            w = BUTTON_DIMEN;
+            w = DIALOG_WIDTH;
             h = BUTTON_DIMEN;
             text = "0 kmh";
         };
@@ -73,11 +84,14 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             y = 0;
             w = BUTTON_DIMEN;
             h = BUTTON_DIMEN/2;
-            color[] = {0,0,0,0};
-            colorActive[] = {0,0,0,0};
+            colorText[] = {0,0,0,0};
+            colorDisabled[] = {0,0,0,0 };
+            colorBackground[] = {0,0,0,0};
             colorBackgroundDisabled[] = {0,0,0,0};
+            colorBackgroundActive[] = {0,0,0,0};
             colorFocused[] = {0,0,0,0};
-            colorBorder[] = {1,0,0,1};
+            colorShadow[] = {0,0,0,0};
+            colorBorder[] = {1,1,1,0.1};
             onButtonClick = "systemChat str _this";
         };
         class ATRAINS_gui_buttonBackward_image: ctrlStaticPictureKeepAspect 

@@ -184,9 +184,7 @@ class CfgFunctions
         {
             file = "ats\core\functions\train\controls";
             class attachToTrainCar{};
-            class disableTrainInputHandlers{};
             class disableTrainPassengerInputHandlers{};
-            class enableTrainInputHandlers{};
             class enableTrainPassengerInputHandlers{};
             class exitTrain{};
             class getInTrainDriver{};
@@ -227,6 +225,7 @@ class CfgFunctions
             class simulateTrainCarsKilled{};
             class simulateTrainCollision{};
             class simulateTrainSound{};
+            class trainVelocityHandler { postInit = 1; };
         };
     };
 };

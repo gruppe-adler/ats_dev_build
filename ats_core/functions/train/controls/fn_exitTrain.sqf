@@ -5,7 +5,6 @@ private _trainCar = player getVariable ["ATRAIN_Current_Train_Car",objNull];
 player setVariable ["ATRAIN_Current_Train", nil];
 player setVariable ["ATRAIN_Current_Train_Car", nil];
 
-[] call ATRAIN_fnc_disableTrainInputHandlers;
 [] call ATRAIN_fnc_disableTrainPassengerInputHandlers;
 
 if(!isNull _train) then {

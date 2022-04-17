@@ -1,5 +1,34 @@
 params ["_train"];
 private _movementDirection = _train getVariable ["ATRAIN_Remote_Movement_Direction",0];
+private _actualSpeed = _train getVariable ["ATRAIN_Velocity", 0];
+private _targetSpeed = (_train getVariable ["ATRAIN_targetSpeed", 0]);
+private _diffSpeed = _targetSpeed - _actualSpeed;
+if (_diffSpeed < 0) then { _diffSpeed = -_diffSpeed; }; // abs is real number only?
+
+if (_train getVariable ["ATRAIN_Remote_Movement_Direction", 0] != 1) then {
+    _train setVariable ["ATRAIN_Remote_Movement_Direction", 1];
+};
+
+if (_targetSpeed < _actualSpeed) then {
+    if (_train getVariable ["ATRAIN_Remote_Movement_Direction", 0] != -1) then {
+        _train setVariable ["ATRAIN_Remote_Movement_Direction", -1];
+    };
+};
+
+if (_targetSpeed > 1 && {_diffSpeed < .5}) then {
+    if (_train getVariable ["ATRAIN_Remote_Movement_Direction", 0] != 0) then {
+        _train setVariable ["ATRAIN_Remote_Movement_Direction", 0];
+    };
+};
+
+if (_targetSpeed == 0 && {_diffSpeed < .1}) then {
+    if (_train getVariable ["ATRAIN_Remote_Movement_Direction", 0] != 0) then {
+        _train setVariable ["ATRAIN_Remote_Movement_Direction", 0];
+        _train setVariable ["ATRAIN_Velocity", 0, true];
+    };
+};
+
+
 
 private _currentCalcTime = diag_tickTime;
 private _lastCalcTime = _train getVariable ["ATRAIN_Local_Last_Velocity_Calculation_Time",_currentCalcTime];
