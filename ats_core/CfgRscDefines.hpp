@@ -1,3 +1,11 @@
+// DEFAULT CLASSES
+#define CT_XSLIDER        43
+#define SL_VERT           0
+
+#define SL_TEXTURES       0x10
+
+
+// GRID
 #define GRID_W (pixelW * pixelGrid)
 #define GRID_H (pixelH * pixelGrid)
 #define QUOTE(var1) #var1
