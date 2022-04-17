@@ -11,15 +11,6 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
     onload = "uiNamespace setVariable ['ATRAINS_CuratorDisplay', _this select 0];";
     onUnload = "uiNamespace setVariable ['ATRAINS_CuratorDisplay', displayNull];";
     class controls {
-        class ATRAINS_gui_bg: ctrlStatic
-        {
-            idc = IDC_GUI_BG;
-            x = 0;
-            y = 0;
-            w = DIALOG_WIDTH;
-            h = DIALOG_HEIGHT;
-            colorBackground[] = {0,0,0,1};
-        };
         class ATRAINS_gui_image: ctrlStaticPictureKeepAspect 
         {
             idc = IDC_GUI_IMAGE;
@@ -38,7 +29,12 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             w = SLIDER_HEIGHT;
             h = DIALOG_HEIGHT;
             onSliderPosChanged = "_this call ATRAIN_fnc_speedControl";
-            sliderRange[] = {0,80};
+            colorBackground[] = {0,0,0,0};
+            colorText[] = {1,1,1,1};
+            font = "RobotoCondensed";
+            sizeEx = 0.02;
+            text = "";
+            sliderRange[] = {0,30};
             sliderStep = 0.5;
             sliderPosition = 0;
             deletable = 0;
@@ -92,7 +88,8 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             colorFocused[] = {0,0,0,0};
             colorShadow[] = {0,0,0,0};
             colorBorder[] = {1,1,1,0.1};
-            onButtonClick = "systemChat str _this";
+            onButtonClick = "[true] call ATRAIN_fnc_directionControl;";
+            toolTip = "Forward";
         };
         class ATRAINS_gui_buttonBackward_image: ctrlStaticPictureKeepAspect 
         {
@@ -115,7 +112,8 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             colorBackgroundDisabled[] = {0,0,0,0};
             colorFocused[] = {0,0,0,0};
             colorBorder[] = {1,0,0,1};
-            onButtonClick = "systemChat str _this";
+            onButtonClick = "[false] call ATRAIN_fnc_directionControl;";
+            toolTip = "Backward";
         };
         class ATRAINS_gui_brake_image: ctrlStaticPictureKeepAspect 
         {
@@ -124,7 +122,6 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             y = 0;
             w = BUTTON_DIMEN;
             h = BUTTON_DIMEN;
-            colorBackground[] = {1,1,1,0.5};
             text = "ats\core\gui\brake_off.paa";
         };
         class ATRAINS_gui_brake: ctrlButton 
@@ -140,6 +137,7 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             colorFocused[] = {0,0,0,0};
             colorBorder[] = {1,0,0,1};
             onButtonClick = "_this call ATRAIN_fnc_brakeControl;";
+            toolTip = "Emergency Brake";
         };
         class ATRAINS_gui_horn_image: ctrlStaticPictureKeepAspect 
         {
@@ -148,7 +146,6 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             y = 0;
             w = BUTTON_DIMEN;
             h = BUTTON_DIMEN;
-            colorBackground[] = {1,1,1,0.6};
             text = "ats\core\gui\horn_off.paa";
         };
         class ATRAINS_gui_horn: ctrlButton 
@@ -164,6 +161,7 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             colorFocused[] = {0,0,0,0};
             colorBorder[] = {1,0,0,1};
             onButtonClick = "_this call ATRAIN_fnc_hornControl;";
+            toolTip = "Horn";
         };
         class ATRAINS_gui_lights_image: ctrlStaticPictureKeepAspect 
         {
@@ -172,7 +170,6 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             y = 0;
             w = BUTTON_DIMEN;
             h = BUTTON_DIMEN;
-            colorBackground[] = {1,1,1,0.7};
             text = "ats\core\gui\lights_off.paa";
         };
         class ATRAINS_gui_lights: ctrlButton 
@@ -188,6 +185,18 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             colorFocused[] = {0,0,0,0};
             colorBorder[] = {1,0,0,1};
             onButtonClick = "_this call ATRAIN_fnc_lightControl;";
+            toolTip = "Lights";
+        };
+        class ATRAINS_gui_bg: ctrlStatic
+        {
+            idc = IDC_GUI_BG;
+            x = 0;
+            y = 0;
+            w = DIALOG_WIDTH;
+            h = DIALOG_HEIGHT;
+            colorBackground[] = {0,0,0,.5};
+            colorBackgroundActive[] = {0,0,0,.5};
+            canModify = 0;
         };
     };
 };

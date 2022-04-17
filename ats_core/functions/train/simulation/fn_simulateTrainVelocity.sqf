@@ -1,33 +1,14 @@
 params ["_train"];
-private _movementDirection = _train getVariable ["ATRAIN_Remote_Movement_Direction",0];
+private _movementDirection = _train getVariable ["ATRAIN_Movement_Direction",0];
 private _actualSpeed = _train getVariable ["ATRAIN_Velocity", 0];
 private _targetSpeed = (_train getVariable ["ATRAIN_targetSpeed", 0]);
 private _diffSpeed = _targetSpeed - _actualSpeed;
 if (_diffSpeed < 0) then { _diffSpeed = -_diffSpeed; }; // abs is real number only?
 
-if (_train getVariable ["ATRAIN_Remote_Movement_Direction", 0] != 1) then {
-    _train setVariable ["ATRAIN_Remote_Movement_Direction", 1];
+// reverse direction
+if (_movementDirection < 0) then {
+	_targetSpeed = - _targetSpeed;
 };
-
-if (_targetSpeed < _actualSpeed) then {
-    if (_train getVariable ["ATRAIN_Remote_Movement_Direction", 0] != -1) then {
-        _train setVariable ["ATRAIN_Remote_Movement_Direction", -1];
-    };
-};
-
-if (_targetSpeed > 1 && {_diffSpeed < .5}) then {
-    if (_train getVariable ["ATRAIN_Remote_Movement_Direction", 0] != 0) then {
-        _train setVariable ["ATRAIN_Remote_Movement_Direction", 0];
-    };
-};
-
-if (_targetSpeed == 0 && {_diffSpeed < .1}) then {
-    if (_train getVariable ["ATRAIN_Remote_Movement_Direction", 0] != 0) then {
-        _train setVariable ["ATRAIN_Remote_Movement_Direction", 0];
-        _train setVariable ["ATRAIN_Velocity", 0, true];
-    };
-};
-
 
 
 private _currentCalcTime = diag_tickTime;
@@ -63,17 +44,18 @@ if(_isDerailed || _isCarDerailed || _isKilled) then {
 	
 } else {
 
-	if(_breakEnabled) then {
+	if(_breakEnabled || _targetSpeed == 0 && _diffSpeed < 0.1) then {
 		_trainAcceleration = 0;
 		_movementDirection = 0;
 		_trainDrag = _trainDrag * 2;
 	};
 	
-	if(_cruiseControlEnabled && !_breakEnabled) then {
+	if(_cruiseControlEnabled && !_breakEnabled || _diffSpeed < 0.1 && !_breakEnabled ) then {
 		_trainDrag = 0;
 	};
 	
 };
+
 
 private _trainModelReversed = _train getVariable ["ATRAIN_Remote_Is_Model_Reversed",false];
 if(_trainModelReversed) then {

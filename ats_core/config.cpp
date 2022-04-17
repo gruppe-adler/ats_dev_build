@@ -89,8 +89,13 @@ class CfgFunctions
         {
             file = "ats\core\functions\gui";
             class brakeControl;
+            class brakeDisplay;
+            class directionControl;
+            class directionDisplay;
             class hornControl;
+            class hornDisplay;
             class lightControl;
+            class lightDisplay;
             class speedControl;
 
         };
@@ -194,7 +199,6 @@ class CfgFunctions
             class rideOnTrain{};
             class rideOnTrainEventHandler{};
             class toggleCruiseControl{};
-            class trainInputHandler{};
             class toggleLights{};
         };
         class Trainfx
