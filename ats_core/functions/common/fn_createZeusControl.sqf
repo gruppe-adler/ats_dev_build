@@ -1,7 +1,5 @@
 params ["_train"];
 
-[] call ATRAIN_fnc_enableTrainInputHandlers;
-
 private _trains = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]);
 // clean previous control, only one can be active
 private _id = _train getVariable ["ATRAIN_trainID", 0];
@@ -205,8 +203,6 @@ missionNamespace setVariable [_identifier, _controls];
         {
             [_x, false] call ATRAIN_fnc_animateUI;
         } forEach _controls;
-        
-        [] call ATRAIN_fnc_disableTrainInputHandlers;
     };
 
     if (!isNull (_train getVariable ["ATRAIN_Remote_Driver", objNull])) exitWith {

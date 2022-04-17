@@ -13,6 +13,7 @@ class CfgPatches
 
 #include "CfgSounds.hpp"
 #include "CfgRsc.hpp"
+#include "CfgCuratorDisplay.hpp"
 
 class CfgNetworkMessages
 {

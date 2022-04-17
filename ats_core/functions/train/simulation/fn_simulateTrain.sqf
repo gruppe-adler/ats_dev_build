@@ -86,6 +86,7 @@ private _trainNodePathDistance = _train getVariable ["ATRAIN_Node_Path_Distance"
 if((_trainDistanceFromFront - _distanceFromEngineToFront) < 0 || (_trainDistanceFromFront + _distanceFromEngineToRear) > _trainNodePathDistance) then {
 	private _trainInReverse = _trainVelocity < 0;
 	private _turnTurnDirection = _train getVariable ["ATRAIN_Remote_Turn_Direction",0];
+	systemChat str _turnTurnDirection;
 	private _trainAlignment = [_train,_frontCar,_trainDistanceFromFront - _distanceFromEngineToFront] call ATRAIN_fnc_calculateTrainAlignment;
 	diag_log format ["trainAlignment %1", _trainAlignment];
 	private _trainDirection = (_trainAlignment select 0) select 1;

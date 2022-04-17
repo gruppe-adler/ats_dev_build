@@ -18,7 +18,7 @@ if(_trainVelocity < 0) then {
 	private _lever = [getPos _rearCar] call ATRAIN_fnc_getSwitch;
 	if (!isNull _lever) then {
 		systemChat str _lever;
-		private _leverPosition = _lever getVariable ["ATRAIN_switch", -1];
+		private _leverPosition = _lever getVariable ["ATRAIN_switch", 0];
 		_train setVariable ["ATRAIN_Remote_Turn_Direction", _leverPosition, true];
 	};
 
@@ -66,7 +66,7 @@ if(_trainVelocity > 0) then {
 	private _lever = [getPos _frontCar] call ATRAIN_fnc_getSwitch;
 	if (!isNull _lever) then {
 		systemChat str _lever;
-		private _leverPosition = _lever getVariable ["ATRAIN_switch", -1];
+		private _leverPosition = _lever getVariable ["ATRAIN_switch", 0];
 		_train setVariable ["ATRAIN_Remote_Turn_Direction", _leverPosition, true];		
 	};
 	

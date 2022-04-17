@@ -45,13 +45,13 @@
                params ["_display", "_xPos", "_yPos"];
 
                if (count (curatorSelected#0) > 0 && uiNamespace getVariable ["ATS_mouseButtonDown", false]) then {
+                    systemChat "moving";
                     private _trainCar = [_entity] call ATRAIN_fnc_isTrain;
                     if (isNull _trainCar) exitWith {};
 
                     private _trainDef = [_entity] call ATRAIN_fnc_getTrainDefinition;
                     _trainCar setVariable ["ATRAIN_curatorMoved", true];
                     missionNamespace setVariable ["ATRAIN_curatorMoveCache", _trainCar];
-                    systemChat "dragging";
                };
           }];
 
@@ -59,13 +59,13 @@
                params ["_display", "_xPos", "_yPos"];
 
                if (count (curatorSelected#0) > 0 && uiNamespace getVariable ["ATS_mouseButtonDown", false]) then {
+                    systemChat "holding";
                     private _trainCar = [_entity] call ATRAIN_fnc_isTrain;
                     if (isNull _trainCar) exitWith {};
 
                     private _trainDef = [_entity] call ATRAIN_fnc_getTrainDefinition;
                     _trainCar setVariable ["ATRAIN_curatorMoved", true];
                     missionNamespace setVariable ["ATRAIN_curatorMoveCache", _trainCar];
-                    systemChat "dragging";
                };
           }];
 
