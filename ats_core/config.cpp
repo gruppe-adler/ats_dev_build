@@ -85,11 +85,14 @@ class CfgFunctions
             class profileMethodStop{};
             class resetProfile{};
         };
-        class fx
+        class gui
         {
-            file = "ats\core\functions\train\fx";
-            class sparksEffectClient{ postinit = 1; };
-            class sparkSmall{};
+            file = "ats\core\functions\gui";
+            class brakeControl;
+            class hornControl;
+            class lightControl;
+            class speedControl;
+
         };
         class Server
         {
@@ -195,6 +198,12 @@ class CfgFunctions
             class toggleCruiseControl{};
             class trainInputHandler{};
             class toggleLights{};
+        };
+        class Trainfx
+        {
+            file = "ats\core\functions\train\fx";
+            class sparksEffectClient{ postinit = 1; };
+            class sparkSmall{};
         };
         class TrainHud
         {

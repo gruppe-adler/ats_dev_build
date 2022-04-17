@@ -1,26 +1,7 @@
-class ctrlStatic;
-class ctrlStaticPictureKeepAspect ;
-class ctrlButton;
-class ctrlSliderH;
-class ctrlControlsGroupNoScrollbars;
+#include "ats\core\CfgRscDefines.hpp"
 
-#define GRID_W (pixelW * pixelGrid)
-#define GRID_H (pixelH * pixelGrid)
-#define QUOTE(var1) #var1
-#define CENTER_X(w) (safezoneX + (safezoneW - w) / 2)
-#define CENTER_Y(h) (safezoneY + (safezoneH - h) / 2)
-#define SPACING 1
 
-#define DIALOG_WIDTH (100 * GRID_W)
-#define DIALOG_HEIGHT (20 * GRID_H)
 
-#define SLIDER_HEIGHT (2 * GRID_H)
-
-#define PICTURE_DIMEN (10 * GRID_H)
-
-#define BUTTON_DIMEN (10 * GRID_H)
-
-#define BUTTONS_X (DIALOG_WIDTH/2 - BUTTON_DIMEN*2)
 
 
 class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars 
@@ -31,85 +12,157 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
     class controls {
         class ATRAINS_gui_bg: ctrlStatic
         {
-            idc = 1000;
+            idc = IDC_GUI_BG;
             x = 0;
             y = 0;
             w = DIALOG_WIDTH;
             h = DIALOG_HEIGHT;
             colorBackground[] = {0,0,0,1};
         };
-
         class ATRAINS_gui_image: ctrlStaticPictureKeepAspect 
         {
-            idc = 1200;
-            text = "#(argb,8,8,3)color(1,1,1,1)";
+            idc = IDC_GUI_IMAGE;
             x = 0;
             y = 0;
             w = PICTURE_DIMEN;
             h = PICTURE_DIMEN;
             tooltip = "Picture"; //--- ToDo: Localize;
+            text = "ats\core\gui\train.paa";
         };
-        class ATRAINS_gui_slider: ctrlSliderH
+        class ATRAINS_gui_slider: ctrlSlider
         {
-            idc = 1900;
-            x = 0;
+            idc = IDC_GUI_SLIDER;
+            x = DIALOG_WIDTH - SLIDER_HEIGHT;
             y = 0;
-            w = DIALOG_WIDTH;
-            h = SLIDER_HEIGHT;
+            w = SLIDER_HEIGHT;
+            h = DIALOG_HEIGHT;
+            onSliderPosChanged = "_this call ATRAIN_fnc_speedControl";
+            sliderRange[] = {0,80};
+            sliderStep = 0.5;
+            sliderPosition = 0;
+            style = SL_TEXTURES;
+            arrowEmpty = "\A3\ui_f\data\gui\cfg\slider\arrowEmpty_ca.paa";
+            arrowFull = "\A3\ui_f\data\gui\cfg\slider\arrowFull_ca.paa";
+            border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
+            thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
+        };
+        class ATRAINS_gui_buttonForward_image: ctrlStaticPictureKeepAspect 
+        {
+            idc = IDC_GUI_FORWARD_IMG;
+            x = DIALOG_WIDTH - 10*GRID_W;
+            y = 0;
+            w = BUTTON_DIMEN;
+            h = BUTTON_DIMEN/2;
+            text = "ats\core\gui\forward_off.paa";
         };
         class ATRAINS_gui_buttonForward: ctrlButton 
         {
-            idc = 1600;
+            idc = IDC_GUI_FORWARD_BTN;
             x = DIALOG_WIDTH - 10*GRID_W;
             y = 0;
             w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN;
-            colorBackground[] = {0.2,0.4,0.2,1};
+            h = BUTTON_DIMEN/2;
+            color[] = {0,0,0,0};
+            colorActive[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorFocused[] = {0,0,0,0};
+            colorBorder[] = {1,0,0,1};
+            onButtonClick = "systemChat str _this";
+        };
+        class ATRAINS_gui_buttonBackward_image: ctrlStaticPictureKeepAspect 
+        {
+            idc = IDC_GUI_BACKWARD_IMG;
+            x = DIALOG_WIDTH - 10*GRID_W;
+            y = DIALOG_HEIGHT/4;
+            w = BUTTON_DIMEN;
+            h = BUTTON_DIMEN/2;
+            text = "ats\core\gui\backward_off.paa";
         };
         class ATRAINS_gui_buttonBackward: ctrlButton 
         {
-            idc = 1601;
+            idc = IDC_GUI_BACKWARD_BTN;
             x = DIALOG_WIDTH - 10*GRID_W;
-            y = DIALOG_HEIGHT/2;
+            y = DIALOG_HEIGHT/4;
             w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN;
-            colorBackground[] = {0.4,0.2,0.2,1};
+            h = BUTTON_DIMEN/2;
+            color[] = {0,0,0,0};
+            colorActive[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorFocused[] = {0,0,0,0};
+            colorBorder[] = {1,0,0,1};
+            onButtonClick = "systemChat str _this";
         };
-        class ATRAINS_gui_button1: ctrlButton 
+        class ATRAINS_gui_brake_image: ctrlStaticPictureKeepAspect 
         {
-            idc = 1602;
+            idc = IDC_GUI_BRAKE_IMG;
             x = BUTTONS_X;
             y = 0;
             w = BUTTON_DIMEN;
             h = BUTTON_DIMEN;
             colorBackground[] = {1,1,1,0.5};
+            text = "ats\core\gui\brake_off.paa";
         };
-        class ATRAINS_gui_button2: ctrlButton 
+        class ATRAINS_gui_brake: ctrlButton 
         {
-            idc = 1603;
+            idc = IDC_GUI_BRAKE_BTN;
+            x = BUTTONS_X;
+            y = 0;
+            w = BUTTON_DIMEN;
+            h = BUTTON_DIMEN;
+            color[] = {0,0,0,0};
+            colorActive[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorFocused[] = {0,0,0,0};
+            colorBorder[] = {1,0,0,1};
+            onButtonClick = "_this call ATRAIN_fnc_brakeControl;";
+        };
+        class ATRAINS_gui_horn_image: ctrlStaticPictureKeepAspect 
+        {
+            idc = IDC_GUI_HORN_IMG;
             x = BUTTONS_X + BUTTON_DIMEN;
             y = 0;
             w = BUTTON_DIMEN;
             h = BUTTON_DIMEN;
             colorBackground[] = {1,1,1,0.6};
+            text = "ats\core\gui\horn_off.paa";
         };
-        class ATRAINS_gui_button3: ctrlButton 
+        class ATRAINS_gui_horn: ctrlButton 
         {
-            idc = 1604;
+            idc = IDC_GUI_HORN_BTN;
+            x = BUTTONS_X + BUTTON_DIMEN;
+            y = 0;
+            w = BUTTON_DIMEN;
+            h = BUTTON_DIMEN;
+            color[] = {0,0,0,0};
+            colorActive[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorFocused[] = {0,0,0,0};
+            colorBorder[] = {1,0,0,1};
+            onButtonClick = "_this call ATRAIN_fnc_hornControl;";
+        };
+        class ATRAINS_gui_lights_image: ctrlStaticPictureKeepAspect 
+        {
+            idc = IDC_GUI_LIGHTS_IMG;
             x = BUTTONS_X + BUTTON_DIMEN*2;
             y = 0;
             w = BUTTON_DIMEN;
             h = BUTTON_DIMEN;
             colorBackground[] = {1,1,1,0.7};
+            text = "ats\core\gui\lights_off.paa";
         };
-        class ATRAINS_gui_button4: ctrlButton 
+        class ATRAINS_gui_lights: ctrlButton 
         {
-            idc = 1605;
-            x = BUTTONS_X + BUTTON_DIMEN*3;
+            idc = IDC_GUI_LIGHTS_BTN;
+            x = BUTTONS_X + BUTTON_DIMEN*2;
             y = 0;
             w = BUTTON_DIMEN;
             h = BUTTON_DIMEN;
-            colorBackground[] = {1,1,1,0.8};
+            color[] = {0,0,0,0};
+            colorActive[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorFocused[] = {0,0,0,0};
+            colorBorder[] = {1,0,0,1};
+            onButtonClick = "_this call ATRAIN_fnc_lightControl;";
         };
     };
 };

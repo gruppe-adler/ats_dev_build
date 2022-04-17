@@ -1,3 +1,5 @@
+#include "ats\core\CfgRscDefines.hpp"
+
 params ["_train"];
 
 private _trains = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]);
@@ -15,6 +17,14 @@ _train setVariable ["ATRAIN_Remote_Cruise_Control_Enabled", true, true];
 private _display = findDisplay 312;
 if (isNull _display) exitWith { hint "no Zeus Display found"; };
 
+private _control = _display ctrlCreate ["ATRAINS_CuratorDisplay", -1];
+_control ctrlSetPosition [safezoneX,safeZoneY+safeZoneH-DIALOG_HEIGHT,safeZoneX+safeZoneW,DIALOG_HEIGHT];
+_control ctrlCommit 0;
+private _speedText = controlNull;
+
+[_control, true] call ATRAIN_fnc_animateUI;
+
+/*
 ([] call BIS_fnc_GUIGrid) params ["", "", "_GUI_GRID_W", "_GUI_GRID_H"];
 _GUI_GRID_W = _GUI_GRID_W / 40;
 _GUI_GRID_H = _GUI_GRID_H / 25;
@@ -79,18 +89,7 @@ _controls pushBackUnique _buttonBreak;
 _buttonBreak ctrlAddEventHandler ["MouseButtonDown", {
     params ["_ctrl", "_button"];
 
-    private _id = _button getVariable ["ATRAIN_zeusTrainID", -1];
-    private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
-    if (isNull _train) exitWith {};
-    if (_train getVariable ["ATRAIN_Remote_brake_Enabled", false]) then {
-        _train setVariable ["ATRAIN_Remote_brake_Enabled", true, true];
-        _ctrl ctrlSetBackgroundColor [1,0,0,1];
-        _ctrl ctrlCommit 0;
-    } else {
-        _train setVariable ["ATRAIN_Remote_brake_Enabled", false, true];
-        _ctrl ctrlSetBackgroundColor [0,0,0,0.5];
-        _ctrl ctrlCommit 0;
-    };
+    _this call ATRAIN_fnc_brakeControl;
 }];
 
 // Button Light
@@ -108,20 +107,7 @@ _buttonLight ctrlEnable true;
 _controls pushBackUnique _buttonLight;
 
 _buttonLight ctrlAddEventHandler ["MouseButtonDown", {
-    params ["_ctrl", "_button"];
-
-    private _id = _button getVariable ["ATRAIN_zeusTrainID", -1];
-    private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
-    if (isNull _train) exitWith {};
-    if (_train getVariable ["ATRAIN_Remote_Lights_Enabled", false]) then {
-        _train setVariable ["ATRAIN_Remote_Lights_Enabled", true, true];
-        _ctrl ctrlSetBackgroundColor [1,0,0,1];
-        _ctrl ctrlCommit 0;
-    } else {
-        _train setVariable ["ATRAIN_Remote_Lights_Enabled", false, true];
-        _ctrl ctrlSetBackgroundColor [0,0,0,0.5];
-        _ctrl ctrlCommit 0;
-    };
+   _this call ATRAIN_fnc_lightControl;
 }];
 
 
@@ -142,11 +128,7 @@ _sliderAcceleration setVariable ["ATRAIN_zeusTrainID", _id];
 _controls pushBackUnique _sliderAcceleration;
 
 _sliderAcceleration ctrlAddEventHandler ["SliderPosChanged", {
-    params ["_control", "_newValue"];
-    private _id = _control getVariable ["ATRAIN_zeusTrainID", -1];
-    private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
-    if (isNull _train) exitWith {};
-    _train setVariable ["ATRAIN_targetSpeed", _newValue, true];
+    _this call ATRAIN_fnc_speedControl;
 }];
 
  // Button Horn
@@ -163,20 +145,7 @@ _buttonHorn setVariable ["ATRAIN_zeusTrainID", _id];
 _controls pushBackUnique _buttonHorn;
 
 _buttonHorn ctrlAddEventHandler ["MouseButtonDown", {
-    params ["_ctrl", "_button"];
-
-    private _id = _button getVariable ["ATRAIN_zeusTrainID", -1];
-    private _train = (missionNamespace getVariable ["ATRAIN_Registered_Trains",[]]) select (_id-1);
-    if (isNull _train) exitWith {};
-    if (_train getVariable ["ATRAIN_Remote_Horn_Enabled", false] == false) then {
-        _train setVariable ["ATRAIN_Remote_Horn_Enabled", true, true];
-        _ctrl ctrlSetBackgroundColor [0,0,1,1];
-        _ctrl ctrlCommit 0;
-    } else {
-        _train setVariable ["ATRAIN_Remote_Horn_Enabled", false, true];
-        _ctrl ctrlSetBackgroundColor [0,0,0,0.5];
-        _ctrl ctrlCommit 0;
-    };
+    _this call ATRAIN_fnc_hornControl;
 }];
 
 missionNamespace setVariable [_identifier, _controls];
@@ -185,6 +154,8 @@ missionNamespace setVariable [_identifier, _controls];
 {
     [_x, true] call ATRAIN_fnc_animateUI;
 } forEach _controls;
+
+*/
 
 [{
     params ["_args", "_handle"];
