@@ -2,7 +2,6 @@ class ctrlStatic;
 class ctrlStaticPictureKeepAspect;
 class ctrlButton;
 class ctrlControlsGroupNoScrollbars;
-class ctrlSlider;
 
 #include "CfgRscDefines.hpp"
 
@@ -22,26 +21,28 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
             tooltip = "Picture"; //--- ToDo: Localize;
             text = "ats\core\gui\train.paa";
         };
-        class ATRAINS_gui_slider: ctrlSlider
+        class ATRAINS_gui_slider
         {
             idc = IDC_GUI_SLIDER;
-            x = DIALOG_WIDTH - SLIDER_HEIGHT*2;
-            y = 0;
-            w = SLIDER_HEIGHT;
-            h = DIALOG_HEIGHT;
+            x = DIALOG_WIDTH - BUTTON_DIMEN*2;
+            y = BUTTON_DIMEN/2;
+            w = BUTTON_DIMEN*2;
+            h = BUTTON_DIMEN/6;
             onSliderPosChanged = "_this call ATRAIN_fnc_speedControl";
             deletable = 0;
             fade = 0;
-            type = CT_XSLIDER;
+            type = 43;
             color[] = {1,1,1,0.6};
             colorActive[] = {1,1,1,1};
-            style = SL_HORZ + SL_TEXTURES;
+            colorDisable[] = {1,1,1,0.4};
+            style = 0x400 + 0x10;
             shadow = 0;
+            sliderStep = 1;
             colorDisabled[] = {1,1,1,0.2};
             arrowEmpty = "\A3\ui_f\data\gui\cfg\slider\arrowEmpty_ca.paa";
             arrowFull = "\A3\ui_f\data\gui\cfg\slider\arrowFull_ca.paa";
             border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
-            thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
+            thumb = "\a3\3DEN\Data\Controls\CtrlXSlider\thumb_ca.paa";
             tooltipColorText[] = {1,1,1,1};
             tooltipColorBox[] = {1,1,1,1};
             tooltipColorShade[] = {0,0,0,0.65};
@@ -59,10 +60,10 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
         class ATRAINS_gui_buttonForward_image: ctrlStaticPictureKeepAspect 
         {
             idc = IDC_GUI_FORWARD_IMG;
-            x = DIALOG_WIDTH - 10*GRID_W;
+            x = DIALOG_WIDTH - (BUTTON_DIMEN);
             y = 0;
             w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
             colorBackground[] = {0,0,0,0};
             colorBackgroundDisabled[] = {0,0,0,0};
             colorBackgroundActive[] = {0,0,0,0};
@@ -71,10 +72,10 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
         class ATRAINS_gui_buttonForward: ctrlButton 
         {
             idc = IDC_GUI_FORWARD_BTN;
-            x = DIALOG_WIDTH - 10*GRID_W;
+            x = DIALOG_WIDTH - (BUTTON_DIMEN);
             y = 0;
             w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
             colorActive[] = {0,0,0,0};
             colorText[] = {0,0,0,0};
             colorDisabled[] = {0,0,0,0};
@@ -90,19 +91,22 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
         class ATRAINS_gui_buttonBackward_image: ctrlStaticPictureKeepAspect 
         {
             idc = IDC_GUI_BACKWARD_IMG;
-            x = DIALOG_WIDTH - 10*GRID_W;
-            y = DIALOG_HEIGHT/4;
+            x = DIALOG_WIDTH - (BUTTON_DIMEN*2);
+            y = 0;
             w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
+            colorBackground[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorBackgroundActive[] = {0,0,0,0};
             text = "ats\core\gui\backward_off.paa";
         };
         class ATRAINS_gui_buttonBackward: ctrlButton 
         {
             idc = IDC_GUI_BACKWARD_BTN;
-            x = DIALOG_WIDTH - 10*GRID_W;
-            y = DIALOG_HEIGHT/4;
+            x = DIALOG_WIDTH - (BUTTON_DIMEN*2);
+            y = 0;
             w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
             colorActive[] = {0,0,0,0};
             colorText[] = {0,0,0,0};
             colorDisabled[] = {0,0,0,0};
@@ -119,18 +123,21 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
         {
             idc = IDC_GUI_BRAKE_IMG;
             x = BUTTONS_X;
-            y = 0;
-            w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN;
+            y = BUTTON_DIMEN/4;
+            w = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
+            colorBackground[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorBackgroundActive[] = {0,0,0,0};
             text = "ats\core\gui\brake_off.paa";
         };
         class ATRAINS_gui_brake: ctrlButton 
         {
             idc = IDC_GUI_BRAKE_BTN;
             x = BUTTONS_X;
-            y = 0;
-            w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN;
+            y = BUTTON_DIMEN/4;
+            w = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
             color[] = {0,0,0,0};
             colorActive[] = {0,0,0,0};
             colorBackground[] = {0,0,0,0};
@@ -144,18 +151,21 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
         {
             idc = IDC_GUI_HORN_IMG;
             x = BUTTONS_X + BUTTON_DIMEN;
-            y = 0;
-            w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN;
+            y = BUTTON_DIMEN/4;
+            w = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
+            colorBackground[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorBackgroundActive[] = {0,0,0,0};
             text = "ats\core\gui\horn_off.paa";
         };
         class ATRAINS_gui_horn: ctrlButton 
         {
             idc = IDC_GUI_HORN_BTN;
             x = BUTTONS_X + BUTTON_DIMEN;
-            y = 0;
-            w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN;
+            y = BUTTON_DIMEN/4;
+            w = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
             color[] = {0,0,0,0};
             colorActive[] = {0,0,0,0};
             colorBackground[] = {0,0,0,0};
@@ -169,18 +179,21 @@ class ATRAINS_CuratorDisplay: ctrlControlsGroupNoScrollbars
         {
             idc = IDC_GUI_LIGHTS_IMG;
             x = BUTTONS_X + BUTTON_DIMEN*2;
-            y = 0;
-            w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN;
+            y = BUTTON_DIMEN/4;
+            w = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
+            colorBackground[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorBackgroundActive[] = {0,0,0,0};
             text = "ats\core\gui\lights_off.paa";
         };
         class ATRAINS_gui_lights: ctrlButton 
         {
             idc = IDC_GUI_LIGHTS_BTN;
             x = BUTTONS_X + BUTTON_DIMEN*2;
-            y = 0;
-            w = BUTTON_DIMEN;
-            h = BUTTON_DIMEN;
+            y = BUTTON_DIMEN/4;
+            w = BUTTON_DIMEN/2;
+            h = BUTTON_DIMEN/1.5;
             color[] = {0,0,0,0};
             colorActive[] = {0,0,0,0};
             colorBackground[] = {0,0,0,0};

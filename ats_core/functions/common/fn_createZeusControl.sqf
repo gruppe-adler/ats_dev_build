@@ -19,7 +19,7 @@ private _display = findDisplay _displayID;
 if (isNull _display) exitWith { hint "no Zeus Display found"; };
 
 private _control = _display ctrlCreate ["ATRAINS_CuratorDisplay", -1];
-_control ctrlSetPosition [CENTER_X(DIALOG_WIDTH),safeZoneY+safeZoneH-DIALOG_HEIGHT/2,safeZoneX+safeZoneW,DIALOG_HEIGHT/2];
+_control ctrlSetPosition [CENTER_X(DIALOG_WIDTH),safeZoneY+safeZoneH-DIALOG_HEIGHT/2,DIALOG_WIDTH,DIALOG_HEIGHT/2];
 _control ctrlCommit 0;
 private _speedText = _control controlsGroupCtrl IDC_GUI_SPEED;
 private _directionForwardImg = _control controlsGroupCtrl IDC_GUI_FORWARD_IMG;

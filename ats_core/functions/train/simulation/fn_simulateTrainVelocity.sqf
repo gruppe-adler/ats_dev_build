@@ -44,13 +44,27 @@ if(_isDerailed || _isCarDerailed || _isKilled) then {
 	
 } else {
 
-	if(_breakEnabled || _targetSpeed == 0 && _diffSpeed < 0.1) then {
+	// emergency break == no acceleration possible
+	if(_breakEnabled) then {
+		_trainAcceleration = 0;
+		_movementDirection = 0;
+		_trainDrag = _trainDrag * 4;
+	};
+
+	// grind to halt when close to zero speed
+	if (_targetSpeed == 0 && _diffSpeed < 0.1) then {
 		_trainAcceleration = 0;
 		_movementDirection = 0;
 		_trainDrag = _trainDrag * 2;
 	};
+
+	// dont accelerate further if speed is reached
+	if (_diffSpeed < 0.1 && !_breakEnabled) then {
+		_trainAcceleration = 0;
+	};
 	
-	if(_cruiseControlEnabled && !_breakEnabled || _diffSpeed < 0.1 && !_breakEnabled ) then {
+	// dont decelerate (default behaviour)
+	if(_cruiseControlEnabled && !_breakEnabled) then {
 		_trainDrag = 0;
 	};
 	
