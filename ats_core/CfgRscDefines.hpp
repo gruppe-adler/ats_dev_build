@@ -18,9 +18,11 @@
 
 #define SLIDER_HEIGHT (2 * GRID_H)
 
-#define PICTURE_DIMEN (10 * GRID_H)
+#define PICTURE_DIMEN_W (10 * GRID_W)
+#define PICTURE_DIMEN_H (10 * GRID_H)
 
-#define BUTTON_DIMEN (10 * GRID_H)
+#define BUTTON_DIMEN_W (10 * GRID_W)
+#define BUTTON_DIMEN_H (10 * GRID_H)
 
 #define BUTTONS_X (DIALOG_WIDTH/2 - BUTTON_DIMEN*2)
 
