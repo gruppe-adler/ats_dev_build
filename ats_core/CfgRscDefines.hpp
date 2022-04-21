@@ -12,17 +12,22 @@
 #define CENTER_X(w) (safezoneX + (safezoneW - w) / 2)
 #define CENTER_Y(h) (safezoneY + (safezoneH - h) / 2)
 #define SPACING 1
+#define BASE_UNIT 24
 
-#define DIALOG_WIDTH (100 * GRID_W)
-#define DIALOG_HEIGHT (20 * GRID_H)
+#define DIALOG_WIDTH (BASE_UNIT * 6 * GRID_W)
+#define DIALOG_HEIGHT (BASE_UNIT * GRID_H)
 
-#define SLIDER_HEIGHT (2 * GRID_H)
+#define SLIDER_WIDTH (22 * GRID_W)
+#define SLIDER_HEIGHT (22 * GRID_H)
 
-#define PICTURE_DIMEN_W (10 * GRID_W)
-#define PICTURE_DIMEN_H (10 * GRID_H)
+#define PICTURE_DIMEN_W (22 * GRID_W)
+#define PICTURE_DIMEN_H (22 * GRID_H)
 
-#define BUTTON_DIMEN_W (10 * GRID_W)
-#define BUTTON_DIMEN_H (10 * GRID_H)
+#define THUMB_DIMEN_W (12 * GRID_W)
+#define THUMB_DIMEN_H (12 * GRID_H)
+
+#define BUTTON_DIMEN_W (22 * GRID_W)
+#define BUTTON_DIMEN_H (22 * GRID_H)
 
 #define BUTTONS_X (DIALOG_WIDTH/2 - BUTTON_DIMEN*2)
 

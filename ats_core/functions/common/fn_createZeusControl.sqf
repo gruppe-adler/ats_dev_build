@@ -18,7 +18,7 @@ disableSerialization;
 private _display = findDisplay _displayID;
 if (isNull _display) exitWith { hint "no Zeus Display found"; };
 
-private _control = _display ctrlCreate ["ATRAINS_CuratorDisplay", -1];
+private _control = _display ctrlCreate ["ATRAINS_CuratorTrainDisplay", -1];
 _control ctrlSetPosition [CENTER_X(DIALOG_WIDTH),safeZoneY+safeZoneH-DIALOG_HEIGHT/2,DIALOG_WIDTH,DIALOG_HEIGHT/2];
 _control ctrlCommit 0;
 private _speedText = _control controlsGroupCtrl IDC_GUI_SPEED;
@@ -40,8 +40,8 @@ uiNamespace setVariable [_identifier, _control];
     params ["_args", "_handle"];
     _args params ["_train", "_identifier", "_directionForwardImg", "_directionBackwardImg", "_hornCtrl", "_lightCtrl", "_brakeCtrl", "_speedText"];
 
-    if (isNull _train || 
-        isNull (player getVariable ["ATRAIN_interfaceOpened", objNull]) || 
+    if (isNull _train ||
+        isNull (player getVariable ["ATRAIN_interfaceOpened", objNull]) ||
         (player getVariable ["ATRAIN_interfaceOpened", objNull] isNotEqualTo _train)
         ) exitWith {
         // clear train ID cache
@@ -58,7 +58,7 @@ uiNamespace setVariable [_identifier, _control];
     private _colorRed = "#ff3333"; // red braking
     private _colorGreen = "#33ff33"; // green acceleration
     private _colorWhite = "#ffffff"; // white default
-    private _colorYellow = "#00ffff"; 
+    private _colorYellow = "#00ffff";
     private _color = _colorWhite;
     private _targetSpeed = (_train getVariable ["ATRAIN_targetSpeed", 0]);
     private _diffSpeed = _targetSpeed - _actualSpeed;
@@ -69,7 +69,7 @@ uiNamespace setVariable [_identifier, _control];
     [_lightCtrl] call ATRAIN_fnc_lightDisplay;
     [_brakeCtrl] call ATRAIN_fnc_brakeDisplay;
 
-    
+
     private _displayText = format ["%1 | %2 km/h", (_targetSpeed*3.6) toFixed 1, (_actualSpeed*3.6) toFixed 1];
     _speedText ctrlSetStructuredText parseText ("<t align='center' size='1' color='" + _color + "'>" + _displayText + "</t>");
     _speedText ctrlCommit 0;
@@ -80,7 +80,7 @@ uiNamespace setVariable [_identifier, _control];
         Movement Direction %1 <br/>
         Local Velocity %2 <br/>
         _targetSpeed %4 <br/>
-        _actualSpeed %5 <br/>", 
+        _actualSpeed %5 <br/>",
         _train getVariable ["ATRAIN_Movement_Direction", -1],
         _train getVariable ["ATRAIN_Velocity", -1],
         _targetSpeed,
