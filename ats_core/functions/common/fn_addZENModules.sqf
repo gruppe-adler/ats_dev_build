@@ -1,7 +1,7 @@
 [{
      (isClass(configFile >> "CfgPatches" >> "zen_main")) &&
      !(isNull (findDisplay 312))
-}, 
+},
 {
      // add handler to show interface
      {
@@ -10,7 +10,11 @@
                params ["_curator", "_entity"];
 
                private _trainCar = [_entity] call ATRAIN_fnc_isTrain;
-               if (isNull _trainCar) exitWith {};
+               if (isNull _trainCar) exitWith {
+                 if (_entity isKindOf "Land_Track_01_switch_F") then {
+                    [_entity, 312] call ATRAIN_fnc_createSwitchControl;
+                 };
+               };
                private _trainDef = [_entity] call ATRAIN_fnc_getTrainDefinition;
                _trainDef params ["_className", "_isDrivable", "_isRideable"];
                if (_isDrivable) then {
@@ -75,10 +79,10 @@
           _curator addEventHandler ["CuratorObjectEdited", {
                params ["_curator", "_entity"];
 
-               
+
                _trainDef params ["_className", "_isDrivable", "_isRideable"];
                player setVariable ["ATRAIN_interfaceOpened", objNull]; // closes zeus control
-               
+
           }];
 
           _curator addCuratorEditableObjects [(missionNamespace getVariable ["ATRAIN_Registered_TrainEngines", []]), false];
@@ -91,7 +95,7 @@
 
          [{false},"Locked"] call ATRAIN_fnc_setTrainDriveCondition;
          [{false},"Locked"] call ATRAIN_fnc_setTrainRideCondition;
-                
+
     }] call zen_custom_modules_fnc_register;
 
 
@@ -100,8 +104,7 @@
 
          [{true},""] call ATRAIN_fnc_setTrainDriveCondition;
          [{true},""] call ATRAIN_fnc_setTrainRideCondition;
-                
+
     }] call zen_custom_modules_fnc_register;
 
 }] call CBA_fnc_waitUntilAndExecute;
-

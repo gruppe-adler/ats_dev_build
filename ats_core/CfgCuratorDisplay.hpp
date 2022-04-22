@@ -11,7 +11,50 @@ class ATRAINS_CuratorSwitchDisplay: ctrlControlsGroupNoScrollbars
     onload = "uiNamespace setVariable ['ATRAINS_CuratorSwitchDisplay', _this select 0];";
     onUnload = "uiNamespace setVariable ['ATRAINS_CuratorSwitchDisplay', displayNull];";
     class controls {
-
+        class ATRAINS_gui_image: ctrlStaticPictureKeepAspect
+        {
+            idc = IDC_GUI_IMAGE;
+            x = SPACING * GRID_W;
+            y = SPACING * GRID_H;
+            w = PICTURE_DIMEN_W;
+            h = PICTURE_DIMEN_H;
+            tooltip = "Picture";
+            text = "ats\core\gui\switch_l.paa";
+        };
+        class ATRAINS_gui_title: ctrlStatic
+        {
+            idc = IDC_GUI_TITLE;
+            x = (BASE_UNIT * GRID_W * 1.5);
+            y = SPACING * GRID_H + PICTURE_DIMEN_H/1.5;
+            w = PICTURE_DIMEN_W;
+            h = PICTURE_DIMEN_H;
+            text = "Switch 0";
+        };
+        class ATRAINS_gui_subtitle: ctrlStatic
+        {
+            idc = IDC_GUI_SUBTITLE;
+            x = (BASE_UNIT * GRID_W * 1.5);
+            y = SPACING * GRID_H + PICTURE_DIMEN_H/2;
+            w = PICTURE_DIMEN_W;
+            h = PICTURE_DIMEN_H;
+            text = "Left";
+        };
+        class ATRAINS_gui_btnSwitch: ctrlButton
+        {
+            idc = IDC_GUI_SWITCH_BTN;
+            x = DIALOG_WIDTH - BASE_UNIT * GRID_W;
+            y = SPACING * GRID_H;
+            w = BUTTON_DIMEN_W;
+            h = BUTTON_DIMEN_H;
+            color[] = {0,0,0,0};
+            colorActive[] = {0,0,0,0};
+            colorBackground[] = {0,0,0,0};
+            colorBackgroundDisabled[] = {0,0,0,0};
+            colorFocused[] = {0,0,0,0};
+            colorBorder[] = {1,0,0,1};
+            onButtonClick = "_this call ATRAIN_fnc_switchControl;";
+            toolTip = "Switch";
+        };
     };
 };
 

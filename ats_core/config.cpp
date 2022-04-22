@@ -66,6 +66,7 @@ class CfgFunctions
             class setLoadingScreenMessage{};
             class addZENModules{ postinit = 1; };
             class createZeusControl{};
+            class createSwitchControl{};
         };
         class customLights {
             file = "ats\core\functions\customLights";
@@ -97,6 +98,7 @@ class CfgFunctions
             class lightControl;
             class lightDisplay;
             class speedControl;
+            class switchControl;
 
         };
         class Server

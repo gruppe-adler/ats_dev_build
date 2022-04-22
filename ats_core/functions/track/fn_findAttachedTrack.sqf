@@ -12,12 +12,16 @@ if (isServer && _isIntersection) then {
 	diag_log "creating switch";
 	private _lever = "Land_Track_01_switch_F" createVehicle [0,0,0];
 	private _position = (getPos _track) findEmptyPosition [0,10,"Land_Track_01_switch_F"];
-	_lever setPos _position; 
+	_lever setPos _position;
 	_lever setDir (getDir _track);
 	_lever setVariable ["ATRAIN_switch", -1, true];
 
+	private _id = missionNamespace getVariable ["ATRAIN_switchCount", 0];
+	_id = _id + 1;
+	missionNamespace setVariable ["ATRAIN_switchCount", _id, true];
+	_lever setVariable ["ATRAIN_switchID", _id, true];
 
-	private _visualizer = "Sign_Sphere100cm_Geometry_F" createVehicle [0,0,0]; 
+	private _visualizer = "Sign_Sphere100cm_Geometry_F" createVehicle [0,0,0];
 	_visualizer setObjectTextureGlobal [0,"#(argb,8,8,3)color(0.1,1,0.1,1.000000,ca)"];
 	_visualizer attachTo [_lever, [0,0,0]];
 	_lever setVariable ["ATRAIN_switchVisualizer", _visualizer, true];
@@ -59,7 +63,7 @@ private _foundTracksAndSearchPosition = {
 	private _tracksAtPosition = [_x, _track] call ATRAIN_fnc_getTracksAtPosition;
 	if(missionNamespace getVariable ["ATRAIN_Track_Debug_Enabled",false]) then {
 		private _arrow = "Sign_Arrow_F" createVehicle [0,0,0];
-		_arrow setPosASL _x; 	
+		_arrow setPosASL _x;
 	};
 	if(count _tracksAtPosition > 0) exitWith {[_tracksAtPosition, _x]};
 
@@ -75,7 +79,7 @@ if(isNil "_foundTracksAndSearchPosition") then {
 		private _tracksAtPosition = [_centerPoint, _track] call ATRAIN_fnc_getTracksAtPosition;
 		if(missionNamespace getVariable ["ATRAIN_Track_Debug_Enabled",false]) then {
 			//private _arrow = "Sign_Arrow_F" createVehicle [0,0,0];
-			//_arrow setPosASL _centerPoint; 	
+			//_arrow setPosASL _centerPoint;
 		};
 		if(count _tracksAtPosition > 0) exitWith {
 			_foundTracksAndSearchPosition = [_tracksAtPosition, _centerPoint]
