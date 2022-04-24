@@ -13,6 +13,7 @@
                if (isNull _trainCar) exitWith {
                  if (_entity isKindOf "Land_Track_01_switch_F") then {
                     [_entity, 312] call ATRAIN_fnc_createSwitchControl;
+                    [] call ATRAIN_fnc_closeControlEH;
                  };
                };
                private _trainDef = [_entity] call ATRAIN_fnc_getTrainDefinition;
@@ -20,16 +21,10 @@
                if (_isDrivable) then {
                     private _train = [_trainCar] call ATRAIN_fnc_getTrain;
                     [_train, 312] call ATRAIN_fnc_createZeusControl;
+                    [] call ATRAIN_fnc_closeControlEH;
                } else {
                     player setVariable ["ATRAIN_interfaceOpened", objNull]; // closes zeus control
                };
-
-               [{
-                    (flatten curatorSelected) isEqualto []
-                 },
-                 {
-                    player setVariable ["ATRAIN_interfaceOpened", objNull]; // closes zeus control
-                 }, []] call CBA_fnc_waitUntilAndExecute;
           }];
 
           /*

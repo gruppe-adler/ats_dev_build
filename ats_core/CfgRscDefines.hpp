@@ -1,6 +1,7 @@
 // DEFAULT CLASSES
 #define CT_XSLIDER        43
-#define SL_VERT           0
+#define SL_VERT           0x00
+#define SL_HORZ           1024
 
 #define SL_TEXTURES       0x10
 
@@ -12,22 +13,22 @@
 #define CENTER_X(w) (safezoneX + (safezoneW - w) / 2)
 #define CENTER_Y(h) (safezoneY + (safezoneH - h) / 2)
 #define SPACING 1
-#define BASE_UNIT 24
+#define BASE_UNIT 12
 
 #define DIALOG_WIDTH (BASE_UNIT * 6 * GRID_W)
 #define DIALOG_HEIGHT (BASE_UNIT * GRID_H)
 
-#define SLIDER_WIDTH (22 * GRID_W)
-#define SLIDER_HEIGHT (22 * GRID_H)
+#define SLIDER_WIDTH (BASE_UNIT * GRID_W)
+#define SLIDER_HEIGHT (BASE_UNIT * GRID_H)
 
-#define PICTURE_DIMEN_W (22 * GRID_W)
-#define PICTURE_DIMEN_H (22 * GRID_H)
+#define PICTURE_DIMEN_W (BASE_UNIT * GRID_W)
+#define PICTURE_DIMEN_H (BASE_UNIT * GRID_H)
 
 #define THUMB_DIMEN_W (12 * GRID_W)
 #define THUMB_DIMEN_H (12 * GRID_H)
 
-#define BUTTON_DIMEN_W (22 * GRID_W)
-#define BUTTON_DIMEN_H (22 * GRID_H)
+#define BUTTON_DIMEN_W (BASE_UNIT * GRID_W)
+#define BUTTON_DIMEN_H (BASE_UNIT * GRID_H)
 
 #define BUTTONS_X (DIALOG_WIDTH/2 - BUTTON_DIMEN*2)
 
@@ -37,9 +38,11 @@
 #define IDC_GUI_IMAGE 71001
 #define IDC_GUI_SLIDER 71002
 #define IDC_GUI_SPEED 71003
+
 #define IDC_GUI_TITLE 71004
 #define IDC_GUI_SUBTITLE 71005
 #define IDC_GUI_SWITCH_BTN 71006
+#define IDC_GUI_SWITCHTEXT 71007
 
 #define IDC_GUI_FORWARD_IMG 72001
 #define IDC_GUI_FORWARD_BTN 72002

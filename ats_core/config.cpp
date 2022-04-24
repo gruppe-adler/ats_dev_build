@@ -55,6 +55,7 @@ class CfgFunctions
             file = "ats\core\functions\common";
             class addEventHandler{};
             class animateUI{};
+            class closeControlEH{};
             class getTypeOf{};
             class hidePlayerObjectGlobal{};
             class rebuildArrayLookupIndexes{};
@@ -98,7 +99,9 @@ class CfgFunctions
             class lightControl;
             class lightDisplay;
             class speedControl;
+            class speedDisplay;
             class switchControl;
+            class switchDisplay;
 
         };
         class Server

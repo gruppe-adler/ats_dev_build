@@ -27,16 +27,16 @@ class ATRAINS_CuratorSwitchDisplay: ctrlControlsGroupNoScrollbars
             x = (BASE_UNIT * GRID_W * 1.5);
             y = SPACING * GRID_H + PICTURE_DIMEN_H/1.5;
             w = PICTURE_DIMEN_W;
-            h = PICTURE_DIMEN_H;
+            h = PICTURE_DIMEN_H/5;
             text = "Switch";
         };
         class ATRAINS_gui_subtitle: ctrlStatic
         {
             idc = IDC_GUI_SUBTITLE;
             x = (BASE_UNIT * GRID_W * 1.5);
-            y = SPACING * GRID_H + PICTURE_DIMEN_H/2;
+            y = SPACING * GRID_H + PICTURE_DIMEN_H/3;
             w = PICTURE_DIMEN_W;
-            h = PICTURE_DIMEN_H;
+            h = PICTURE_DIMEN_H/5;
             text = "Left";
         };
         class ATRAINS_gui_btnSwitch: ctrlButton
@@ -46,14 +46,37 @@ class ATRAINS_CuratorSwitchDisplay: ctrlControlsGroupNoScrollbars
             y = SPACING * GRID_H;
             w = BUTTON_DIMEN_W;
             h = BUTTON_DIMEN_H;
-            color[] = {0,0,0,0};
             colorActive[] = {0,0,0,0};
+            colorText[] = {0,0,0,0};
+            colorDisabled[] = {0,0,0,0};
             colorBackground[] = {0,0,0,0};
             colorBackgroundDisabled[] = {0,0,0,0};
+            colorBackgroundActive[] = {1,1,1,0.1};
             colorFocused[] = {0,0,0,0};
-            colorBorder[] = {1,0,0,1};
-            onButtonClick = "_this call ATRAIN_fnc_switchControl;";
+            colorShadow[] = {0,0,0,0};
+            colorBorder[] = {1,1,1,0.1};
+            onButtonClick = "[objNull, _this] call ATRAIN_fnc_switchControl;";
             toolTip = "Switch";
+        };
+        class ATRAINS_gui_btnSwitchText: ctrlStatic
+        {
+            idc = IDC_GUI_SWITCHTEXT;
+            x = DIALOG_WIDTH - BASE_UNIT * GRID_W;
+            y = SPACING * GRID_H;
+            w = BUTTON_DIMEN_W;
+            h = BUTTON_DIMEN_H;
+            text = "TOGGLE";
+        };
+        class ATRAINS_gui_bg: ctrlStatic
+        {
+            idc = IDC_GUI_BG;
+            x = 0;
+            y = 0;
+            w = DIALOG_WIDTH;
+            h = DIALOG_HEIGHT;
+            colorBackground[] = {0,0,0,.5};
+            colorBackgroundActive[] = {0,0,0,.5};
+            canModify = 0;
         };
     };
 };
@@ -77,25 +100,31 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
         class ATRAINS_gui_slider
         {
             idc = IDC_GUI_SLIDER;
-            x = DIALOG_WIDTH - SLIDER_WIDTH;
+            x = DIALOG_WIDTH - SLIDER_WIDTH/7;
             y = SPACING * GRID_H;
-            w = SLIDER_WIDTH;
+            w = SLIDER_WIDTH/8;
             h = SLIDER_HEIGHT;
+            enable = 1;
+            show = 1;
+            blinkingPeriod = 0;
             onSliderPosChanged = "_this call ATRAIN_fnc_speedControl";
             sliderStep = 1;
+            sliderPosition = 50;
+            sliderRange[] = {0, 100};
+            lineSize = 0.1;
             deletable = 0;
             fade = 0;
             type = 43;
             color[] = {1,1,1,0.6};
             colorActive[] = {1,1,1,1};
             colorDisable[] = {1,1,1,0.4};
-            style = 0 + 0x10;
+            style = SL_HORZ + SL_TEXTURES;
             shadow = 0;
             colorDisabled[] = {1,1,1,0.2};
-            arrowEmpty = "#(rgb,8,8,3)color(1,0,0,1)";
-            arrowFull = "#(rgb,8,8,3)color(0,1,0,1)";
+            arrowEmpty = "\A3\ui_f\data\gui\cfg\slider\arrowEmpty_ca.paa";
+            arrowFull = "\A3\ui_f\data\gui\cfg\slider\arrowFull_ca.paa";
             border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
-            thumb = "#(rgb,8,8,3)color(0,0,1,1)";
+            thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
             tooltipColorText[] = {1,1,1,1};
             tooltipColorBox[] = {1,1,1,1};
             tooltipColorShade[] = {0,0,0,0.65};
@@ -109,6 +138,7 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
             w = SLIDER_WIDTH;
             h = SLIDER_HEIGHT;
             text = "0 kmh";
+            font = "RobotoCondensed";
         };
         class ATRAINS_gui_buttonForward_image: ctrlStaticPictureKeepAspect
         {
@@ -163,6 +193,7 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
             color[] = {0,0,0,0};
             colorActive[] = {0,0,0,0};
             colorBackground[] = {0,0,0,0};
+            colorBackgroundActive[] = {1,1,1,0.1};
             colorBackgroundDisabled[] = {0,0,0,0};
             colorFocused[] = {0,0,0,0};
             colorBorder[] = {1,0,0,1};
@@ -191,6 +222,7 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
             color[] = {0,0,0,0};
             colorActive[] = {0,0,0,0};
             colorBackground[] = {0,0,0,0};
+            colorBackgroundActive[] = {1,1,1,0.1};
             colorBackgroundDisabled[] = {0,0,0,0};
             colorFocused[] = {0,0,0,0};
             colorBorder[] = {1,0,0,1};
@@ -219,6 +251,7 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
             color[] = {0,0,0,0};
             colorActive[] = {0,0,0,0};
             colorBackground[] = {0,0,0,0};
+            colorBackgroundActive[] = {1,1,1,0.1};
             colorBackgroundDisabled[] = {0,0,0,0};
             colorFocused[] = {0,0,0,0};
             colorBorder[] = {1,0,0,1};

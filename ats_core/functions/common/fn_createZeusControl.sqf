@@ -17,15 +17,19 @@ private _display = findDisplay _displayID;
 if (isNull _display) exitWith { hint "no Zeus Display found"; };
 
 private _control = _display ctrlCreate ["ATRAINS_CuratorTrainDisplay", -1];
-_control ctrlSetPosition [CENTER_X(DIALOG_WIDTH),safeZoneY+safeZoneH-DIALOG_HEIGHT/2,DIALOG_WIDTH,DIALOG_HEIGHT/2];
+_control ctrlSetPosition [CENTER_X(DIALOG_WIDTH),safeZoneY+safeZoneH-DIALOG_HEIGHT,DIALOG_WIDTH,DIALOG_HEIGHT];
 _control ctrlCommit 0;
 private _speedText = _control controlsGroupCtrl IDC_GUI_SPEED;
 private _directionForwardImg = _control controlsGroupCtrl IDC_GUI_FORWARD_IMG;
-private _directionBackwardImg = _control controlsGroupCtrl IDC_GUI_BACKWARD_IMG;
 
 private _hornCtrl = _control controlsGroupCtrl IDC_GUI_HORN_IMG;
 private _lightCtrl = _control controlsGroupCtrl IDC_GUI_LIGHTS_IMG;
 private _brakeCtrl = _control controlsGroupCtrl IDC_GUI_BRAKE_IMG;
+
+private _slider = _control controlsGroupCtrl IDC_GUI_SLIDER;
+_slider sliderSetRange [0, 30]; // todo get max train speed
+_slider sliderSetSpeed  [1, .5, .5];
+_slider ctrlCommit 0;
 
 [_control, true] call ATRAIN_fnc_animateUI;
 
@@ -36,7 +40,7 @@ uiNamespace setVariable [_identifier, _control];
 // GUI refresh
 [{
     params ["_args", "_handle"];
-    _args params ["_train", "_identifier", "_directionForwardImg", "_directionBackwardImg", "_hornCtrl", "_lightCtrl", "_brakeCtrl", "_speedText"];
+    _args params ["_train", "_identifier", "_directionForwardImg", "_hornCtrl", "_lightCtrl", "_brakeCtrl", "_speedCtrl"];
 
     if (isNull _train ||
         isNull (player getVariable ["ATRAIN_interfaceOpened", objNull]) ||
@@ -52,25 +56,13 @@ uiNamespace setVariable [_identifier, _control];
         [_handle] call CBA_fnc_removePerFrameHandler;
     };
 
-    private _actualSpeed = _train getVariable ["ATRAIN_Velocity", 0];
-    private _colorRed = "#ff3333"; // red braking
-    private _colorGreen = "#33ff33"; // green acceleration
-    private _colorWhite = "#ffffff"; // white default
-    private _colorYellow = "#00ffff";
-    private _color = _colorWhite;
-    private _targetSpeed = (_train getVariable ["ATRAIN_targetSpeed", 0]);
-    private _diffSpeed = _targetSpeed - _actualSpeed;
-    if (_diffSpeed < 0) then { _diffSpeed = -_diffSpeed; }; // abs is real number only?
-
-    [_train, _directionForwardImg, _directionBackwardImg] call ATRAIN_fnc_directionDisplay;
+    [_train, _directionForwardImg] call ATRAIN_fnc_directionDisplay;
     [_hornCtrl] call ATRAIN_fnc_hornDisplay;
     [_lightCtrl] call ATRAIN_fnc_lightDisplay;
     [_brakeCtrl] call ATRAIN_fnc_brakeDisplay;
+    [_train, _speedCtrl] call ATRAIN_fnc_speedDisplay;
 
 
-    private _displayText = format ["%1 | %2 km/h", (_targetSpeed*3.6) toFixed 1, (_actualSpeed*3.6) toFixed 1];
-    _speedText ctrlSetStructuredText parseText ("<t align='center' size='1' color='" + _color + "'>" + _displayText + "</t>");
-    _speedText ctrlCommit 0;
 
     /*
     hintSilent parseText format [
@@ -87,4 +79,4 @@ uiNamespace setVariable [_identifier, _control];
     ];
     */
 
-}, 0, [_train, _identifier, _directionForwardImg, _directionBackwardImg, _hornCtrl, _lightCtrl, _brakeCtrl, _speedText]] call CBA_fnc_addPerFramehandler;
+}, 0, [_train, _identifier, _directionForwardImg, _hornCtrl, _lightCtrl, _brakeCtrl, _speedCtrl]] call CBA_fnc_addPerFramehandler;

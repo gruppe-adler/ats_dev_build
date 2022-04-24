@@ -14,7 +14,7 @@ if (isServer && _isIntersection) then {
 	private _position = (getPos _track) findEmptyPosition [0,10,"Land_Track_01_switch_F"];
 	_lever setPos _position;
 	_lever setDir (getDir _track);
-	_lever setVariable ["ATRAIN_switch", -1, true];
+	_lever setVariable ["ATRAIN_switch", 1, true];
 
 	private _id = missionNamespace getVariable ["ATRAIN_switchCount", 0];
 	_id = _id + 1;
@@ -22,7 +22,7 @@ if (isServer && _isIntersection) then {
 	_lever setVariable ["ATRAIN_switchID", _id, true];
 
 	private _visualizer = "Sign_Sphere100cm_Geometry_F" createVehicle [0,0,0];
-	_visualizer setObjectTextureGlobal [0,"#(argb,8,8,3)color(0.1,1,0.1,1.000000,ca)"];
+	_visualizer setObjectTextureGlobal [0,"#(argb,8,8,3)color(1,0.1,0.1,1.000000,ca)"];
 	_visualizer attachTo [_lever, [0,0,0]];
 	_lever setVariable ["ATRAIN_switchVisualizer", _visualizer, true];
 

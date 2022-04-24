@@ -17,7 +17,7 @@ private _display = findDisplay _displayID;
 if (isNull _display) exitWith { hint "no Zeus Display found"; };
 
 private _control = _display ctrlCreate ["ATRAINS_CuratorSwitchDisplay", -1];
-_control ctrlSetPosition [CENTER_X(DIALOG_WIDTH),safeZoneY+safeZoneH-DIALOG_HEIGHT/2,DIALOG_WIDTH,DIALOG_HEIGHT/2];
+_control ctrlSetPosition [CENTER_X(DIALOG_WIDTH),safeZoneY+safeZoneH-DIALOG_HEIGHT,DIALOG_WIDTH,DIALOG_HEIGHT];
 _control ctrlCommit 0;
 
 [_control, true] call ATRAIN_fnc_animateUI;
@@ -28,15 +28,20 @@ uiNamespace setVariable [_identifier, _control];
 private _titleCtrl = _control controlsGroupCtrl IDC_GUI_TITLE;
 private _subtitleCtrl = _control controlsGroupCtrl IDC_GUI_SUBTITLE;
 private _title = "SWITCH " + str _id;
-private _subtitle = if (_switch getVariable ["ATRAIN_switch", -1]) then { "Left" } else { "Right" };
+private _subtitle = if (_switch getVariable ["ATRAIN_switch", -1] == -1) then { "Left" } else { "Right" };
+private _imageCtrl = _control controlsGroupCtrl IDC_GUI_IMAGE;
+private _btn = _control controlsGroupCtrl IDC_GUI_SWITCH_BTN;
+_btn setVariable ["ATRAIN_switchObject", _switch];
 
 _titleCtrl ctrlSetText _title;
 _subtitleCtrl ctrlSetText _subtitle;
+_titleCtrl ctrlCommit 0;
+_subtitleCtrl ctrlCommit 0;
 
 // GUI refresh
 [{
     params ["_args", "_handle"];
-    _args params ["_switch", "_identifier", "_subtitle"];
+    _args params ["_switch", "_identifier", "_subtitleCtrl", "_imageCtrl"];
 
     if (isNull _switch ||
         isNull (player getVariable ["ATRAIN_interfaceOpened", objNull]) ||
@@ -50,7 +55,7 @@ _subtitleCtrl ctrlSetText _subtitle;
         [_handle] call CBA_fnc_removePerFrameHandler;
     };
 
-    [_subtitle] call ATRAIN_fnc_switchDisplay;
+    [_switch, _subtitleCtrl, _imageCtrl] call ATRAIN_fnc_switchDisplay;
 
     /*
     hintSilent parseText format [
@@ -67,4 +72,4 @@ _subtitleCtrl ctrlSetText _subtitle;
     ];
     */
 
-}, 0, [_switch, _identifier, _subtitle]] call CBA_fnc_addPerFramehandler;
+}, 0, [_switch, _identifier, _subtitleCtrl, _imageCtrl]] call CBA_fnc_addPerFramehandler;
