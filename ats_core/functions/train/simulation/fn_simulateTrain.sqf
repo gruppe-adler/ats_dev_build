@@ -55,8 +55,9 @@ if(_isDerailed) exitWith {
 };
 
 // Braking Effects
-private _breakEnabled = player getVariable ["ATRAIN_Remote_brake_Enabled", false];
+private _breakEnabled = _train getVariable ["ATRAIN_Remote_brake_Enabled", false];
 if (_breakEnabled && random 10 > 9) then {
+	private _trainCars = [_train] call ATRAIN_fnc_getTrainCars;
 	["ATRAIN_sparkSmall", [(selectRandom _trainCars)]] call CBA_fnc_globalEvent;
 };
 

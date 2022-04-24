@@ -2,7 +2,7 @@ private _switches = missionNamespace getVariable ["ATRAIN_Registered_Switches", 
 if (_switches find _track > -1) exitWith {};
 diag_log "creating switch";
 private _lever = "Land_Track_01_switch_F" createVehicle [0,0,0];
-private _position = (getPos _track) findEmptyPosition [0,10,"Land_Track_01_switch_F"];
+private _position = _track getPos [2, getDir _track];
 _lever setPos _position;
 _lever setDir (getDir _track);
 _lever setVariable ["ATRAIN_switch", -1, true];
@@ -16,8 +16,10 @@ private _visualizer = "Sign_Arrow_Direction_Green_F" createVehicle [0,0,0];
 _visualizer attachTo [_lever, [0,0,1]];
 
 private _dir = getDir _lever;
-[_visualizer, [_dir + 30, 0, 0]] call BIS_fnc_setObjectRotation;
+[_visualizer, [_dir - 70, 0, 0]] call BIS_fnc_setObjectRotation;
 _lever setVariable ["ATRAIN_switchVisualizer", _visualizer, true];
+_lever animate ["lever_rot", 1, true];
+
 
 [_lever] remoteExec ["ATRAIN_fnc_switchAction", [0,-2] select isDedicated, true];
 

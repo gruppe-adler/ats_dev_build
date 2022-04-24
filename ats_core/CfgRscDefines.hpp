@@ -2,6 +2,7 @@
 #define CT_XSLIDER        43
 #define SL_VERT           0x00
 #define SL_HORZ           1024
+#define SL_WAT            0x400
 
 #define SL_TEXTURES       0x10
 

@@ -28,7 +28,7 @@ class ATRAINS_CuratorSwitchDisplay: ctrlControlsGroupNoScrollbars
             y = SPACING * GRID_H + PICTURE_DIMEN_H/3;
             w = PICTURE_DIMEN_W;
             h = PICTURE_DIMEN_H/5;
-            size = 0.05;
+            size = 0.08;
             text = "Switch";
             font = "RobotoCondensedBold";
             colorText[] = {1,1,1,0.8};
@@ -37,7 +37,7 @@ class ATRAINS_CuratorSwitchDisplay: ctrlControlsGroupNoScrollbars
         {
             idc = IDC_GUI_SUBTITLE;
             x = (BASE_UNIT * GRID_W * 1.5);
-            y = SPACING * GRID_H + PICTURE_DIMEN_H/2.4;
+            y = SPACING * GRID_H + PICTURE_DIMEN_H/2.1;
             w = PICTURE_DIMEN_W;
             h = PICTURE_DIMEN_H/5;
             text = "Left";
@@ -71,6 +71,7 @@ class ATRAINS_CuratorSwitchDisplay: ctrlControlsGroupNoScrollbars
             w = BUTTON_DIMEN_W;
             h = BUTTON_DIMEN_H;
             text = "TOGGLE";
+            align = "center";
             font = "RobotoCondensedBold";
         };
         class ATRAINS_gui_bg: ctrlStatic
@@ -106,10 +107,10 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
         class ATRAINS_gui_slider
         {
             idc = IDC_GUI_SLIDER;
-            x = DIALOG_WIDTH - SLIDER_WIDTH/7;
+            x = DIALOG_WIDTH - SLIDER_WIDTH;
             y = SPACING * GRID_H;
-            w = SLIDER_WIDTH/8;
-            h = SLIDER_HEIGHT;
+            w = SLIDER_WIDTH;
+            h = 0.03;
             enable = 1;
             show = 1;
             blinkingPeriod = 0;
@@ -121,7 +122,7 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
             deletable = 0;
             fade = 0;
             type = CT_XSLIDER;
-            style = SL_VERT + SL_TEXTURES;
+            style = SL_WAT + SL_TEXTURES;
             color[] = {1,1,1,0.6};
             colorActive[] = {1,1,1,1};
             colorDisable[] = {1,1,1,0.4};

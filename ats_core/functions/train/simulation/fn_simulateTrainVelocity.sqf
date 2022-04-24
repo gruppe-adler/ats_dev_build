@@ -1,5 +1,5 @@
 params ["_train"];
-private _movementDirection = _train getVariable ["ATRAIN_Movement_Direction",0];
+private _movementDirection = _train getVariable ["ATRAIN_Movement_Direction",-1]; // 0
 private _actualSpeed = _train getVariable ["ATRAIN_Velocity", 0];
 private _targetSpeed = (_train getVariable ["ATRAIN_targetSpeed", 0]);
 private _diffSpeed = _targetSpeed - _actualSpeed;
@@ -48,7 +48,7 @@ if(_isDerailed || _isCarDerailed || _isKilled) then {
 	if(_breakEnabled) then {
 		_trainAcceleration = 0;
 		_movementDirection = 0;
-		_trainDrag = _trainDrag * 4;
+		_trainDrag = _trainDrag * 8;
 	};
 
 	// grind to halt when close to zero speed
