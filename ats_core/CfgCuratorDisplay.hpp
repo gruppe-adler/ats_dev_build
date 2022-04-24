@@ -28,7 +28,7 @@ class ATRAINS_CuratorSwitchDisplay: ctrlControlsGroupNoScrollbars
             y = SPACING * GRID_H + PICTURE_DIMEN_H/1.5;
             w = PICTURE_DIMEN_W;
             h = PICTURE_DIMEN_H;
-            text = "Switch 0";
+            text = "Switch";
         };
         class ATRAINS_gui_subtitle: ctrlStatic
         {

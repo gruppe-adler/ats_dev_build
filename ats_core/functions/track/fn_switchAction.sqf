@@ -26,7 +26,7 @@ _lever addAction
     {
         params ["_target", "_caller", "_actionId", "_arguments"];
 
-        
+        [_target] call ATRAIN_fnc_switchControl;
     },
     nil,
     1.5,

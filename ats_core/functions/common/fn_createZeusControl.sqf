@@ -11,8 +11,6 @@ if (!isNull _control) then { ctrlDelete _control; };
 
 player setVariable ["ATRAIN_interfaceOpened", _train];
 
-_train setVariable ["ATRAIN_Remote_Cruise_Control_Enabled", true, true];
-
 // create control
 disableSerialization;
 private _display = findDisplay _displayID;

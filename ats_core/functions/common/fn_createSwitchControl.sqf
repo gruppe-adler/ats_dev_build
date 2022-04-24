@@ -11,8 +11,6 @@ if (!isNull _control) then { ctrlDelete _control; };
 
 player setVariable ["ATRAIN_interfaceOpened", _switch];
 
-_switch setVariable ["ATRAIN_Remote_Cruise_Control_Enabled", true, true];
-
 // create control
 disableSerialization;
 private _display = findDisplay _displayID;
@@ -24,14 +22,21 @@ _control ctrlCommit 0;
 
 [_control, true] call ATRAIN_fnc_animateUI;
 
-uiNamespace setVariable ["ATRAIN_interfaceTrainID", _id];
+uiNamespace setVariable ["ATRAIN_interfaceSwitchID", _id];
 uiNamespace setVariable [_identifier, _control];
 
+private _titleCtrl = _control controlsGroupCtrl IDC_GUI_TITLE;
+private _subtitleCtrl = _control controlsGroupCtrl IDC_GUI_SUBTITLE;
+private _title = "SWITCH " + str _id;
+private _subtitle = if (_switch getVariable ["ATRAIN_switch", -1]) then { "Left" } else { "Right" };
+
+_titleCtrl ctrlSetText _title;
+_subtitleCtrl ctrlSetText _subtitle;
 
 // GUI refresh
 [{
     params ["_args", "_handle"];
-    _args params ["_switch", "_identifier"];
+    _args params ["_switch", "_identifier", "_subtitle"];
 
     if (isNull _switch ||
         isNull (player getVariable ["ATRAIN_interfaceOpened", objNull]) ||
@@ -44,6 +49,9 @@ uiNamespace setVariable [_identifier, _control];
         // end refresh loop
         [_handle] call CBA_fnc_removePerFrameHandler;
     };
+
+    [_subtitle] call ATRAIN_fnc_switchDisplay;
+
     /*
     hintSilent parseText format [
         "Train ID %6<br/>
@@ -59,4 +67,4 @@ uiNamespace setVariable [_identifier, _control];
     ];
     */
 
-}, 0, [_switch, _identifier]] call CBA_fnc_addPerFramehandler;
+}, 0, [_switch, _identifier, _subtitle]] call CBA_fnc_addPerFramehandler;
