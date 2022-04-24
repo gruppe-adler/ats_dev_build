@@ -1,6 +1,6 @@
 params ["_train", "_directionForwardImg"];
 
-private _direction = _train getVariable ["ATRAIN_Movement_Direction", -1];
+private _direction = _train getVariable ["ATRAIN_Thrust", -1];
 
 switch (_direction) do { 
     case 1 : { 

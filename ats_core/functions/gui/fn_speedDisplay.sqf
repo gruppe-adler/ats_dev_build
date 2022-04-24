@@ -12,5 +12,5 @@ if (_diffSpeed < 0) then { _diffSpeed = -_diffSpeed; }; // abs is real number on
 
 
 private _displayText = format ["%1 | %2 km/h", (_targetSpeed*3.6) toFixed 1, (_actualSpeed*3.6) toFixed 1];
-_speedCtrl ctrlSetStructuredText parseText ("<t align='center' size='1.5' color='" + _color + "'>" + _displayText + "</t>");
+_speedCtrl ctrlSetStructuredText parseText ("<t align='center' font='RobotoCondensedBold' size='1.5' color='" + _color + "'>" + _displayText + "</t>");
 _speedCtrl ctrlCommit 0;

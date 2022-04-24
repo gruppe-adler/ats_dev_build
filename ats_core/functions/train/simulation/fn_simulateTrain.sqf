@@ -54,11 +54,15 @@ if(_isDerailed) exitWith {
 	} forEach _trainCars;
 };
 
-// Braking Effects
+// Braking FX
 private _breakEnabled = _train getVariable ["ATRAIN_Remote_brake_Enabled", false];
 if (_breakEnabled && random 10 > 9) then {
 	private _trainCars = [_train] call ATRAIN_fnc_getTrainCars;
-	["ATRAIN_sparkSmall", [(selectRandom _trainCars)]] call CBA_fnc_globalEvent;
+	private _trainCar = selectRandom _trainCars;
+	private _selectionPosition = _trainCar selectionposition (selectRandom ["wheel1", "wheel2", "wheel3", "wheel4"]);
+	if (_selectionPosition isNotEqualTo [0,0,0]) then {
+		["ATRAIN_sparkSmall", [_trainCar, _selectionPosition]] call CBA_fnc_globalEvent;
+	};
 };
 
 

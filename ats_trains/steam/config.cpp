@@ -27,33 +27,6 @@ class CfgVehicles {
 		displayName = "Steam Locomotive (Small)";
 		author 	= "Profi Developers, imported by badbenson";
 
-		class Sounds
-        {
-            class train_engine_idle
-            {
-                sound[] = {"\ats\core\sounds\train_steam_engine_idle.ogg", 2, 1, 600};
-                frequency = "1";
-                volume = "CustomSoundController1";
-            };
-            class train_engine
-            {
-                sound[] = {"\ats\core\sounds\train_steam_engine.ogg", 2, 1, 800};
-                frequency = "1";
-                volume = "CustomSoundController2";
-            };
-            class train_track
-            {
-                sound[] = {"\ats\core\sounds\train_track.ogg", 2, 1, 800};
-                frequency = "1";
-                volume = "CustomSoundController3";
-            };
-            class train_brake
-            {
-                sound[] = {"\ats\core\sounds\train_brake1.ogg", 0, 1, 800};
-                frequency = "1";
-                volume = "CustomSoundController4";
-            };
-        };
 	};
 	
 	class ATS_Trains_Steam_Large : ATS_Trains_Base
@@ -64,33 +37,6 @@ class CfgVehicles {
 		displayName = "Steam Locomotive (Large)";
 		author 	= "Profi Developers, imported by badbenson";
 
-		class Sounds
-        {
-            class train_engine_idle
-            {
-                sound[] = {"\ats\core\sounds\train_steam_engine_idle.ogg", 2, 1, 600};
-                frequency = "1";
-                volume = "CustomSoundController1";
-            };
-            class train_engine
-            {
-                sound[] = {"\ats\core\sounds\train_steam_engine.ogg", 2, 1, 800};
-                frequency = "1";
-                volume = "CustomSoundController2";
-            };
-            class train_track
-            {
-                sound[] = {"\ats\core\sounds\train_track.ogg", 2, 1, 800};
-                frequency = "1";
-                volume = "CustomSoundController3";
-            };
-            class train_brake
-            {
-                sound[] = {"\ats\core\sounds\train_brake1.ogg", 0, 1, 800};
-                frequency = "1";
-                volume = "CustomSoundController4";
-            };
-        };
 	};
 	
 };

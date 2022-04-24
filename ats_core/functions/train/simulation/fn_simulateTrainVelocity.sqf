@@ -1,14 +1,9 @@
 params ["_train"];
-private _movementDirection = _train getVariable ["ATRAIN_Movement_Direction",-1]; // 0
+private _thrust = _train getVariable ["ATRAIN_Thrust", 1]; // 0
 private _actualSpeed = _train getVariable ["ATRAIN_Velocity", 0];
 private _targetSpeed = (_train getVariable ["ATRAIN_targetSpeed", 0]);
 private _diffSpeed = _targetSpeed - _actualSpeed;
 if (_diffSpeed < 0) then { _diffSpeed = -_diffSpeed; }; // abs is real number only?
-
-// reverse direction
-if (_movementDirection < 0) then {
-	_targetSpeed = - _targetSpeed;
-};
 
 
 private _currentCalcTime = diag_tickTime;
@@ -39,7 +34,7 @@ private _isKilled = _train getVariable ["ATRAIN_Remote_Killed", false];
 if(_isDerailed || _isCarDerailed || _isKilled) then {
 
 	_trainAcceleration = 0;
-	_movementDirection = 0;
+	_thrust = 0;
 	_trainDrag = _trainDrag * 4;
 	
 } else {
@@ -47,42 +42,52 @@ if(_isDerailed || _isCarDerailed || _isKilled) then {
 	// emergency break == no acceleration possible
 	if(_breakEnabled) then {
 		_trainAcceleration = 0;
-		_movementDirection = 0;
+		_thrust = 0;
 		_trainDrag = _trainDrag * 8;
+	};
+
+	// dont decelerate (default behaviour)
+	if(_cruiseControlEnabled && !_breakEnabled) then {
+		_trainDrag = 0;
 	};
 
 	// grind to halt when close to zero speed
 	if (_targetSpeed == 0 && _diffSpeed < 0.1) then {
 		_trainAcceleration = 0;
-		_movementDirection = 0;
+		_thrust = 0;
 		_trainDrag = _trainDrag * 2;
+	};
+
+	// if set higher than target speed, reduce speed
+	if (_actualSpeed > _targetSpeed) then {
+		_thrust = -1;
+	};
+
+	// if set lower than target speed, raise speed
+	if (_actualSpeed < _targetSpeed) then {
+		_thrust = 1;
 	};
 
 	// dont accelerate further if speed is reached
 	if (_diffSpeed < 0.1 && !_breakEnabled) then {
 		_trainAcceleration = 0;
-	};
-	
-	// dont decelerate (default behaviour)
-	if(_cruiseControlEnabled && !_breakEnabled) then {
-		_trainDrag = 0;
-	};
-	
+		_thrust = 0;
+	};	
 };
 
 
 private _trainModelReversed = _train getVariable ["ATRAIN_Remote_Is_Model_Reversed",false];
 if(_trainModelReversed) then {
-	_movementDirection = _movementDirection * -1;
+	_thrust = _thrust * -1;
 };
 
 private _trainMaxVelocity = _train getVariable ["ATRAIN_Remote_Train_Max_Velocity",12];
 private _trainVelocity = _train getVariable ["ATRAIN_Velocity",0];
-_trainVelocity = (_trainVelocity + (_trainAcceleration * _movementDirection * _deltaCalcTime)) min _trainMaxVelocity max -_trainMaxVelocity;
-if(_trainVelocity > 0 && _movementDirection == 0) then {
+_trainVelocity = (_trainVelocity + (_trainAcceleration * _thrust * _deltaCalcTime)) min _trainMaxVelocity max -_trainMaxVelocity;
+if(_trainVelocity > 0 && _thrust == 0) then {
 	_trainVelocity = (_trainVelocity - (_trainDrag * _deltaCalcTime)) max 0;
 };
-if(_trainVelocity < 0 && _movementDirection == 0) then {
+if(_trainVelocity < 0 && _thrust == 0) then {
 	_trainVelocity = (_trainVelocity + (_trainDrag * _deltaCalcTime)) min 0;
 };
 private _localVelocityUpdate = _train getVariable ["ATRAIN_Velocity_Update",nil];

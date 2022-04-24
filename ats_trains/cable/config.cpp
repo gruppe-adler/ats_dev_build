@@ -25,35 +25,6 @@ class CfgVehicles {
 		displayName = "Cable Car";
 		model = "\ats\trains\cable\ats_trains_cable_car.p3d";
 		author 	= "Turgut G, imported by hcpookie";
-
-		class Sounds
-        {
-            class train_engine_idle
-            {
-                sound[] = {"\ats\core\sounds\train_engine_idle.ogg", 0, 1, 600};
-                frequency = "1";
-                volume = "CustomSoundController1";
-            };
-            class train_engine
-            {
-                sound[] = {"\ats\core\sounds\train_engine.ogg", 0, 1, 800};
-                frequency = "1";
-                volume = "CustomSoundController2";
-            };
-            class train_track
-            {
-                sound[] = {"\ats\core\sounds\train_track.ogg", 0, 1, 800};
-                frequency = "1";
-                volume = "CustomSoundController3";
-            };
-
-            class train_brake
-            {
-                sound[] = {"\ats\core\sounds\train_brake1.ogg", 0, 1, 800};
-                frequency = "1";
-                volume = "CustomSoundController4";
-            };
-        };
 		
 		class AnimationSources {
 			class HitGlass1

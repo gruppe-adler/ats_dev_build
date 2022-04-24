@@ -3,6 +3,7 @@ params ["_train"];
 
 private _trainEngine = [_train] call ATRAIN_fnc_getTrainEngine;
 
+/*
 #define ENGINE_DISTANCE 800
 #define ENGINE_MAX_SPEED 10
 #define ENGINE_IDLE_DISTANCE 600
@@ -21,7 +22,16 @@ if (_train getVariable ["ATRAIN_Remote_brake_Enabled", false]) then {
 } else {
     setCustomSoundController [_trainEngine, "CustomSoundController4", 0]; // no sound
 };
+*/
 
+#define ENGINE_DISTANCE 800
+#define ENGINE_MAX_SPEED 10
+#define ENGINE_IDLE_DISTANCE 600
+#define ENGINE_IDLE_MAX_SPEED 10
+private _trainSpeed = _train getVariable ["ATRAIN_Velocity", 0];
+// simulate sound controller
+setCustomSoundController [_trainEngine, "CustomSoundController1", (1-((_trainSpeed min ENGINE_IDLE_MAX_SPEED)/ENGINE_IDLE_MAX_SPEED)) max 0.8]; // idle engine
+setCustomSoundController [_trainEngine, "CustomSoundController2", (_trainSpeed min ENGINE_MAX_SPEED)/ENGINE_MAX_SPEED]; // driving engine
 
 
 // Simulate horn sound

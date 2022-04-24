@@ -1,11 +1,7 @@
-params ["_trainCar"];
-
-private _selectionPosition = selectionposition (selectRandom ["wheel1", "wheel2", "wheel3", "wheel4"]);
-
-if (_selectionPosition isEqualTo [0,0,0]) exitWith {};
+params ["_trainCar", "_selectionPosition"];
 
 private _brightness = 0.1;
-private _light = "#lightpoint" createVehicleLocal _position;
+private _light = "#lightpoint" createVehicleLocal (_trainCar modelToWorld _selectionPosition);
 _light setLightBrightness _brightness;
 _light setLightAmbient [1.0, 0.25, 0.25];
 _light setLightColor [1.0, 0.25, 0.25];
@@ -13,7 +9,7 @@ _light setLightColor [1.0, 0.25, 0.25];
 
 private _duration = 0.01 + random 0.1;
 private _amount = 0.001 + random 0.01;
-private _spark = "#particlesource" createVehicleLocal _position;
+private _spark = "#particlesource" createVehicleLocal (_trainCar modelToWorld _selectionPosition);
 private _lifetime = (random 0.5);
 
 

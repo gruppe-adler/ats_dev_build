@@ -19,7 +19,7 @@ if (isNull _display) exitWith { hint "no Zeus Display found"; };
 private _control = _display ctrlCreate ["ATRAINS_CuratorTrainDisplay", -1];
 _control ctrlSetPosition [CENTER_X(DIALOG_WIDTH),safeZoneY+safeZoneH-DIALOG_HEIGHT,DIALOG_WIDTH,DIALOG_HEIGHT];
 _control ctrlCommit 0;
-private _speedText = _control controlsGroupCtrl IDC_GUI_SPEED;
+private _speedCtrl = _control controlsGroupCtrl IDC_GUI_SPEED;
 private _directionForwardImg = _control controlsGroupCtrl IDC_GUI_FORWARD_IMG;
 
 private _hornCtrl = _control controlsGroupCtrl IDC_GUI_HORN_IMG;
@@ -71,7 +71,7 @@ uiNamespace setVariable [_identifier, _control];
         Local Velocity %2 <br/>
         _targetSpeed %4 <br/>
         _actualSpeed %5 <br/>",
-        _train getVariable ["ATRAIN_Movement_Direction", -1],
+        _train getVariable ["ATRAIN_Thrust", -1],
         _train getVariable ["ATRAIN_Velocity", -1],
         _targetSpeed,
         _actualSpeed,

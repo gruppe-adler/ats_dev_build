@@ -1,4 +1,5 @@
 class ctrlStatic;
+class ctrlStructuredText;
 class ctrlStaticPictureKeepAspect;
 class ctrlButton;
 class ctrlControlsGroupNoScrollbars;
@@ -137,13 +138,13 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
             tooltipColorShade[] = {0,0,0,0.65};
             toolTip = "Thrust";
         };
-        class ATRAINS_gui_speed: ctrlStatic
+        class ATRAINS_gui_speed: ctrlStructuredText
         {
             idc = IDC_GUI_SPEED;
             x = DIALOG_WIDTH - SLIDER_WIDTH;
-            y = SPACING * GRID_H;
+            y = SPACING * GRID_H + SLIDER_HEIGHT/2;
             w = SLIDER_WIDTH;
-            h = SLIDER_HEIGHT;
+            h = SLIDER_HEIGHT/2;
             text = "0 kmh";
             font = "RobotoCondensedBold";
         };
@@ -157,7 +158,7 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
             colorBackground[] = {0,0,0,0};
             colorBackgroundDisabled[] = {0,0,0,0};
             colorBackgroundActive[] = {1,1,1,0.1};
-            text = "ats\core\gui\forward_off.paa";
+            text = "ats\core\gui\forward_on.paa";
         };
         class ATRAINS_gui_buttonForward: ctrlButton
         {

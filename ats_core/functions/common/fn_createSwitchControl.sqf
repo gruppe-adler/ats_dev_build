@@ -64,7 +64,7 @@ _subtitleCtrl ctrlCommit 0;
         Local Velocity %2 <br/>
         _targetSpeed %4 <br/>
         _actualSpeed %5 <br/>",
-        _switch getVariable ["ATRAIN_Movement_Direction", -1],
+        _switch getVariable ["ATRAIN_Thrust", -1],
         _switch getVariable ["ATRAIN_Velocity", -1],
         _targetSpeed,
         _actualSpeed,
