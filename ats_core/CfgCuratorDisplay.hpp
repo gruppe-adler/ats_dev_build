@@ -25,19 +25,24 @@ class ATRAINS_CuratorSwitchDisplay: ctrlControlsGroupNoScrollbars
         {
             idc = IDC_GUI_TITLE;
             x = (BASE_UNIT * GRID_W * 1.5);
-            y = SPACING * GRID_H + PICTURE_DIMEN_H/1.5;
+            y = SPACING * GRID_H + PICTURE_DIMEN_H/3;
             w = PICTURE_DIMEN_W;
             h = PICTURE_DIMEN_H/5;
+            size = 0.05;
             text = "Switch";
+            font = "RobotoCondensedBold";
+            colorText[] = {1,1,1,0.8};
         };
         class ATRAINS_gui_subtitle: ctrlStatic
         {
             idc = IDC_GUI_SUBTITLE;
             x = (BASE_UNIT * GRID_W * 1.5);
-            y = SPACING * GRID_H + PICTURE_DIMEN_H/3;
+            y = SPACING * GRID_H + PICTURE_DIMEN_H/2.4;
             w = PICTURE_DIMEN_W;
             h = PICTURE_DIMEN_H/5;
             text = "Left";
+            font = "RobotoCondensedBold";
+            colorText[] = {1,1,1,0.6};
         };
         class ATRAINS_gui_btnSwitch: ctrlButton
         {
@@ -66,6 +71,7 @@ class ATRAINS_CuratorSwitchDisplay: ctrlControlsGroupNoScrollbars
             w = BUTTON_DIMEN_W;
             h = BUTTON_DIMEN_H;
             text = "TOGGLE";
+            font = "RobotoCondensedBold";
         };
         class ATRAINS_gui_bg: ctrlStatic
         {
@@ -114,11 +120,11 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
             lineSize = 0.1;
             deletable = 0;
             fade = 0;
-            type = 43;
+            type = CT_XSLIDER;
+            style = SL_VERT + SL_TEXTURES;
             color[] = {1,1,1,0.6};
             colorActive[] = {1,1,1,1};
             colorDisable[] = {1,1,1,0.4};
-            style = SL_HORZ + SL_TEXTURES;
             shadow = 0;
             colorDisabled[] = {1,1,1,0.2};
             arrowEmpty = "\A3\ui_f\data\gui\cfg\slider\arrowEmpty_ca.paa";
@@ -138,7 +144,7 @@ class ATRAINS_CuratorTrainDisplay: ctrlControlsGroupNoScrollbars
             w = SLIDER_WIDTH;
             h = SLIDER_HEIGHT;
             text = "0 kmh";
-            font = "RobotoCondensed";
+            font = "RobotoCondensedBold";
         };
         class ATRAINS_gui_buttonForward_image: ctrlStaticPictureKeepAspect
         {

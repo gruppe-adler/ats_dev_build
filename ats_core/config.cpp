@@ -134,6 +134,7 @@ class CfgFunctions
             class findPathToNearestNode{};
             class findAttachedTrack{};
             class switchAction{};
+            class switchCreate{};
             class getSwitch{};
         };
         class Train
