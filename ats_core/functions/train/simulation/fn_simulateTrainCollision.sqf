@@ -30,13 +30,13 @@ if(isNull _collidedWith) then {
 		//diag_log str ["Hit Another Train", _train, _otherTrain, _lastTrainCollision];
 		// Get vector dir of car
 		private _carVectorDir = vectorDirVisual _trainCar;
-		private _carIsBackwards = _trainCar getVariable ["ATRAIN_Remote_Is_Backwards", false];
+		private _carIsBackwards = _trainCar getVariable ["ATRAIN_Is_Backwards", false];
 		if(_carIsBackwards) then {
 			_carVectorDir = _carVectorDir vectorMultiply -1;
 		};
 		// Get vector dir of other car
 		private _otherCarVectorDir = vectorDirVisual _collidedWith;
-		private _otherCarIsBackwards = _collidedWith getVariable ["ATRAIN_Remote_Is_Backwards", false];
+		private _otherCarIsBackwards = _collidedWith getVariable ["ATRAIN_Is_Backwards", false];
 		if(_otherCarIsBackwards) then {
 			_otherCarVectorDir = _otherCarVectorDir vectorMultiply -1;
 		};

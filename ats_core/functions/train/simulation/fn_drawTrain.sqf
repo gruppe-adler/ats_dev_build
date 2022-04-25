@@ -24,25 +24,6 @@ if(_trainDerailedSimulated) exitWith {};
 	private _distanceFromLastToNewPosition = _trainCar getVariable ["ATRAIN_Distance_From_Last_To_New_Position", 0];
 	private _animateTrain = _trainCar getVariable ["ATRAIN_Remote_Animate_Train",false];
 	private _isCableCar = _trainCar getVariable ["ATRAIN_Remote_Is_Cable_Car",false];
-
-	/*
-	if(_distanceFromLastToNewPosition > 0.01) then {
-		if(_carsWithAnimationEnabled < _maxAnimatedCars) then {
-			_carsWithAnimationEnabled = _carsWithAnimationEnabled + 1;
-			if(!simulationEnabled _trainCar) then {
-				_trainCar enableSimulation true;
-			};
-		} else {
-			if(simulationEnabled _trainCar) then {
-				_trainCar enableSimulation false;
-			};
-		};
-	} else {
-		if(simulationEnabled _trainCar) then {
-			_trainCar enableSimulation false;
-		};
-	};
-	*/
 	
 	// prevent flipping
 	// if(_distanceFromLastToNewPosition > 0.01) then {
@@ -101,7 +82,7 @@ if(!_trainCalculationsQueued) then {
 			};
 			private _trainVectorDirection = _rearAlignmentPointPosition vectorFromTo _frontAlignmentPointPosition;
 			private _trainPosition = _frontAlignmentPointPosition vectorAdd ((_rearAlignmentPointPosition vectorDiff _frontAlignmentPointPosition) vectorMultiply 0.5);
-			private _trainIsBackwards = _trainCar getVariable ["ATRAIN_Remote_Is_Backwards", false];
+			private _trainIsBackwards = _trainCar getVariable ["ATRAIN_Is_Backwards", false];
 			private _animateTrain = _trainCar getVariable ["ATRAIN_Remote_Animate_Train",false];
 			if(_trainIsBackwards) then {
 				_trainVectorDirection = _trainVectorDirection vectorMultiply -1;

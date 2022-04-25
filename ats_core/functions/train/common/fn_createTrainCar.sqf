@@ -33,16 +33,12 @@ _trainCar setVariable ["ATRAIN_Static_Position",[getPosASLVisual _trainCar, [vec
 
 [_trainCar] call ATRAIN_fnc_clutchCreate;
 
-if (_isDrivable) then {
-	// _trainCar enableSimulationGlobal false;
-	
+if (_isDrivable) then {	
 	//if (count _lightOffsets > 0) then {
 		[_trainCar] remoteExec ["ATRAIN_fnc_attachLights",0,true];
 	//};
-	
-} else {
-	_trainCar enableSimulationGlobal true;
 };
+_trainCar enableSimulationGlobal true;
 
 [_trainCar] call ATRAIN_fnc_registerTrainCar;
 [_trainCar] call ATRAIN_fnc_attachCargo;

@@ -115,6 +115,15 @@ class CfgFunctions
             class updateTrackMap{};
             class requestATSInstall{};
         };
+        class Switches 
+        {
+            file = "ats\core\functions\switches";
+            class switchAction{};
+            class switchCreate{};
+            class getSwitch{};
+            class switchIsRight{};
+            class switchIsLeft{};
+        };
         class Track
         {
             file = "ats\core\functions\track";
@@ -133,9 +142,6 @@ class CfgFunctions
             class findPathsToNearestNodes{};
             class findPathToNearestNode{};
             class findAttachedTrack{};
-            class switchAction{};
-            class switchCreate{};
-            class getSwitch{};
         };
         class Train
         {

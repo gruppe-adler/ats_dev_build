@@ -44,7 +44,7 @@ if(isServer) then {
 				private _train = _x;
 				private _driver = _train getVariable ["ATRAIN_Remote_Driver", objNull];
 				private _velocity = _train getVariable ["ATRAIN_Velocity",0];
-				private _trainDerailed = _train getVariable ["ATRAIN_Remote_Train_Derailed",false];
+				private _trainDerailed = _train getVariable ["ATRAIN_Train_Derailed",false];
 				if(_trainDerailed && _velocity == 0) then {
 					{
 						if(_x getVariable ["ATRAIN_Remote_Train_Car_Derailed", false]) then {
@@ -60,7 +60,7 @@ if(isServer) then {
 							[_train] call ATRAIN_fnc_createTrain;
 						};
 					};
-					_train setVariable ["ATRAIN_Remote_Train_Derailed",nil,true];
+					_train setVariable ["ATRAIN_Train_Derailed",nil,true];
 				};
 				if(isNull _driver && _velocity == 0) then {
 					_unregisterTrains pushBack _train;

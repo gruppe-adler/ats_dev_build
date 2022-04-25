@@ -70,16 +70,6 @@
           }];
           */
 
-
-          _curator addEventHandler ["CuratorObjectEdited", {
-               params ["_curator", "_entity"];
-
-
-               _trainDef params ["_className", "_isDrivable", "_isRideable"];
-               player setVariable ["ATRAIN_interfaceOpened", objNull]; // closes zeus control
-
-          }];
-
           _curator addCuratorEditableObjects [(missionNamespace getVariable ["ATRAIN_Registered_TrainEngines", []]), false];
           _curator addCuratorEditableObjects [(missionNamespace getVariable ["ATRAIN_Registered_Levers", []]), false];
 

@@ -16,13 +16,13 @@ for [{_i=_trainEngineIndex-1}, {_i>=0}, {_i=_i-1}] do
 	// Define if car is facing backwards relative to train direction
 	private _trainCar = [_trainCar] call ATRAIN_fnc_getTrainCar;
 	private _frontCarSearchVectorDir = vectorDirVisual ([_lastCarSeen] call ATRAIN_fnc_getTrainCar);
-	private _frontCarIsBackwards = _lastCarSeen getVariable ["ATRAIN_Remote_Is_Backwards", false];
+	private _frontCarIsBackwards = _lastCarSeen getVariable ["ATRAIN_Is_Backwards", false];
 	if(!_frontCarIsBackwards) then {
 		_frontCarSearchVectorDir = _frontCarSearchVectorDir vectorMultiply -1;
 	};
 	private _carIsBackwards = (_frontCarSearchVectorDir vectorDotProduct (vectorDir _trainCar)) > 0;
-	if(str (_trainCar getVariable ["ATRAIN_Remote_Is_Backwards", false]) != str _carIsBackwards) then {
-		_trainCar setVariable ["ATRAIN_Remote_Is_Backwards", _carIsBackwards, true];
+	if(str (_trainCar getVariable ["ATRAIN_Is_Backwards", false]) != str _carIsBackwards) then {
+		_trainCar setVariable ["ATRAIN_Is_Backwards", _carIsBackwards, true];
 	};
 	private _priorCarLength = _lastCarSeen getVariable ["ATRAIN_Remote_Car_Length", 6];
 	private _priorCarDistanceFronEngine = _lastCarSeen getVariable ["ATRAIN_Offset_From_Engine", 0];
@@ -44,13 +44,13 @@ for [{_i=_trainEngineIndex+1}, {_i<_trainCarsCount}, {_i=_i+1}] do
 	// Define if car is facing backwards relative to train direction
 	private _trainCar = [_trainCar] call ATRAIN_fnc_getTrainCar;
 	private _rearCarSearchVectorDir = vectorDirVisual ([_lastCarSeen] call ATRAIN_fnc_getTrainCar);
-	private _rearCarIsBackwards = _lastCarSeen getVariable ["ATRAIN_Remote_Is_Backwards", false];
+	private _rearCarIsBackwards = _lastCarSeen getVariable ["ATRAIN_Is_Backwards", false];
 	if(!_rearCarIsBackwards) then {
 		_rearCarSearchVectorDir = _rearCarSearchVectorDir vectorMultiply -1;
 	};
 	private _carIsBackwards = (_rearCarSearchVectorDir vectorDotProduct (vectorDir _trainCar)) > 0;
-	if(str (_trainCar getVariable ["ATRAIN_Remote_Is_Backwards", false]) != str _carIsBackwards) then {
-		_trainCar setVariable ["ATRAIN_Remote_Is_Backwards", _carIsBackwards, true];
+	if(str (_trainCar getVariable ["ATRAIN_Is_Backwards", false]) != str _carIsBackwards) then {
+		_trainCar setVariable ["ATRAIN_Is_Backwards", _carIsBackwards, true];
 	};
 	private _priorCarLength = _lastCarSeen getVariable ["ATRAIN_Remote_Car_Length", 6];
 	private _priorCarDistanceFronEngine = _lastCarSeen getVariable ["ATRAIN_Offset_From_Engine", 0];

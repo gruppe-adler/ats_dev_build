@@ -28,6 +28,7 @@ private _brakeCtrl = _control controlsGroupCtrl IDC_GUI_BRAKE_IMG;
 
 private _slider = _control controlsGroupCtrl IDC_GUI_SLIDER;
 _slider sliderSetRange [0, 30]; // todo get max train speed
+_slider sliderSetPosition (_train getVariable ["ATRAIN_targetSpeed", 0]);
 _slider sliderSetSpeed  [1, .5, .5];
 _slider ctrlCommit 0;
 

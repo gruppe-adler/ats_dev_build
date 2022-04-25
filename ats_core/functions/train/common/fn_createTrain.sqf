@@ -13,7 +13,7 @@ _train setVariable ["ATRAIN_Node_Path_Distance", nil, true];
 _train setVariable ["ATRAIN_Remote_Driver", nil, true];
 _train setVariable ["ATRAIN_Remote_Train_Max_Velocity",_trainCar getVariable ["ATRAIN_Remote_Train_Max_Velocity",12],true];
 
-//_trainCar setVariable ["ATRAIN_Remote_Is_Backwards", false, true];
+//_trainCar setVariable ["ATRAIN_Is_Backwards", false, true];
 _trainCar setVariable ["ATRAIN_Current_Train", _train, true];
 _trainCar setVariable ["ATRAIN_Offset_From_Engine", 0, true];
 _train setVariable ["ATRAIN_Remote_Engine", _trainCar, true];	

@@ -26,7 +26,7 @@ private _trainDrag = _trainDragMin + (_trainDragRange * (1 - ((_carCount / 20) m
 
 private _cruiseControlEnabled = _train getVariable ["ATRAIN_Remote_Cruise_Control_Enabled", false];
 private _breakEnabled = player getVariable ["ATRAIN_Remote_brake_Enabled", false];
-private _isDerailed = _train getVariable ["ATRAIN_Remote_Train_Derailed",false];
+private _isDerailed = _train getVariable ["ATRAIN_Train_Derailed",false];
 private _isCarDerailed = _train getVariable ["ATRAIN_Remote_Train_Car_Derailed",false];
 
 private _isKilled = _train getVariable ["ATRAIN_Remote_Killed", false];

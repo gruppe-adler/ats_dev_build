@@ -12,13 +12,13 @@ if(_deltaSimulationTime > (missionNamespace getVariable ["ATS_trainSimulation_In
 };
 
 // Simulate train derailment
-private _isDerailed = _train getVariable ["ATRAIN_Remote_Train_Derailed",false];
+private _isDerailed = _train getVariable ["ATRAIN_Train_Derailed",false];
 if(_isDerailed) exitWith {
 	private _trainDerailedSimulated = _train getVariable ["ATRAIN_Local_Train_Derailed_Simulated",false];
 	private _trainCars = [_train] call ATRAIN_fnc_getTrainCars;
 	if(!_trainDerailedSimulated) then {
 		_train setVariable ["ATRAIN_Local_Train_Derailed_Simulated",true];
-		private _derailSpeed = _train getVariable ["ATRAIN_Remote_Train_Derailed_Speed",0];
+		private _derailSpeed = _train getVariable ["ATRAIN_Train_Derailed_Speed",0];
 		{ 
 			private _trainCar = _x;
 			private _trainCarVectorDir = vectorDirVisual _trainCar;
@@ -90,8 +90,8 @@ private _nodePath = _train getVariable ["ATRAIN_Node_Path",[]];
 private _trainNodePathDistance = _train getVariable ["ATRAIN_Node_Path_Distance",0];
 if((_trainDistanceFromFront - _distanceFromEngineToFront) < 0 || (_trainDistanceFromFront + _distanceFromEngineToRear) > _trainNodePathDistance) then {
 	private _trainInReverse = _trainVelocity < 0;
-	private _turnTurnDirection = _train getVariable ["ATRAIN_Remote_Turn_Direction",0];
-	systemChat str _turnTurnDirection;
+	private _turnDirection = _train getVariable ["ATRAIN_Turn_Direction",0];
+	systemChat str _turnDirection;
 	private _trainAlignment = [_train,_frontCar,_trainDistanceFromFront - _distanceFromEngineToFront] call ATRAIN_fnc_calculateTrainAlignment;
 	diag_log format ["trainAlignment %1", _trainAlignment];
 	private _trainDirection = (_trainAlignment select 0) select 1;
@@ -122,7 +122,7 @@ if((_trainDistanceFromFront - _distanceFromEngineToFront) < 0 || (_trainDistance
 	private _nextNodeIndexMinValue = 0;
 	{
 		private _dirDotProduct = _trainDirectionRight vectorDotProduct (_x select 1);
-		private _dirDotProductDelta = abs (_turnTurnDirection - _dirDotProduct);
+		private _dirDotProductDelta = abs (_turnDirection - _dirDotProduct);
 		if(_nextNodeIndex == -1 || _dirDotProductDelta < _nextNodeIndexMinValue) then {
 			_nextNodeIndex = _x select 0;
 			_nextNodeDistance = _x select 2;
