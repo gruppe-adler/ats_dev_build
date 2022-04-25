@@ -203,7 +203,8 @@ class CfgVehicles {
         {
             class train_engine_idle
             {
-                sound[] = {"\ats\trains\sounds\train_engine_idle.ogg", 2, 1, 600};
+                
+                sound[] = {"\ats\core\sounds\train_engine_idle.ogg", 2, 1, 800};
                 frequency = "1";
                 volume = "CustomSoundController1";
             };

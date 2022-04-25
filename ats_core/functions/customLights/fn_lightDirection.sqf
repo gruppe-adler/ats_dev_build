@@ -4,14 +4,14 @@ private _lightsForward = [
  "#light_l",
  "#light_r",
  "#light_m",
- "#light_l_back_red",
- "#light_r_back_red"
+ "#light_back_r_red",
+ "#light_back_l_red"
 ];
 
 private _lightsBackward = [
- "#light_l_back",
- "#light_r_back",
- "#light_m_back",
+ "#light_back_l",
+ "#light_back_r",
+ "#light_back_m",
  "#light_l_red",
  "#light_r_red"
 ];
