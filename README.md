@@ -8,3 +8,7 @@ custom build of dudas ATS
 * add light switching functionality to at least one train engine when switching directions
 * potentially include manual track switches, although this is even less likely to get done
 
+
+Note (06/2022) 
+
+there is an internal version being more fleshed out and many things working. not in a releasable state though and with reforger i am not sure if this will ever be finished.
